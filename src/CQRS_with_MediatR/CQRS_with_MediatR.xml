@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CQRS_with_MediatR</name>
+    </assembly>
+    <members>
+        <member name="T:CQRS_with_MediatR.Controllers.ProductController">
+            <summary>
+            Performs operations on Product
+            </summary>
+        </member>
+        <member name="M:CQRS_with_MediatR.Controllers.ProductController.Create(CQRS_with_MediatR.Features.ProductFeatures.Commands.CreateProductCommand)">
+            <summary>
+            Creates a New Product.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS_with_MediatR.Controllers.ProductController.GetAll">
+            <summary>
+            Gets all Products.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS_with_MediatR.Controllers.ProductController.GetById(System.Int32)">
+            <summary>
+            Gets Product Entity by Id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS_with_MediatR.Controllers.ProductController.Delete(System.Int32)">
+            <summary>
+            Deletes Product Entity based on Id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS_with_MediatR.Controllers.ProductController.Update(System.Int32,CQRS_with_MediatR.Features.ProductFeatures.Commands.UpdateProductCommand)">
+            <summary>
+            Updates the Product Entity based on Id.   
+            </summary>
+            <param name="id"></param>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

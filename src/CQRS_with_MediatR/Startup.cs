@@ -1,7 +1,10 @@
+using CQRS_with_MediatR.Context;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CQRS_with_MediatR
@@ -27,11 +31,26 @@ namespace CQRS_with_MediatR
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            #region Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CQRS_with_MediatR", Version = "v1" });
+                c.IncludeXmlComments($"{AppDomain.CurrentDomain.BaseDirectory}\\CQRS_with_MediatR.xml");
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "CQRS_with_MediatR",
+                });
             });
+            #endregion
+
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
+
+            services.AddScoped<IApplicationContext>(provider => provider.GetService<ApplicationContext>());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,9 +59,15 @@ namespace CQRS_with_MediatR
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CQRS_with_MediatR v1"));
             }
+
+            #region Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CQRS_with_MediatR");
+            });
+            #endregion
 
             app.UseHttpsRedirection();
 
