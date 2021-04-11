@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace API_Versioning.Controllers.v1
 {
-    [ApiVersion("1.0")]
+    //Deprecating an API Version
+    [ApiVersion("1.0", Deprecated = true)]
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")] //versioning via URL
+    [Route("api/[controller]")] //versioning via query
     public class DataController : ControllerBase
     {
         [HttpGet]

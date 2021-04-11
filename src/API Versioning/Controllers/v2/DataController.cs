@@ -8,7 +8,8 @@ namespace API_Versioning.Controllers.v2
 {
     [ApiVersion("2.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")] //versioning via URL
+    [Route("api/[controller]")] //versioning via query
     public class DataController : ControllerBase
     {
         [HttpGet]
