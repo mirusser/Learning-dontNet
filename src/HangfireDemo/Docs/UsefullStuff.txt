@@ -1,0 +1,4 @@
+﻿
+CRON: https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm
+
+great blog about hangfire: https://codewithmukesh.com/blog/hangfire-in-aspnet-core-3-1/
