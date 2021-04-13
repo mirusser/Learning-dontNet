@@ -1,0 +1,12 @@
+﻿
+0. Trace – Detailed messages with sensitive app data.
+1. Debug – Useful for the development environment.
+2. Information – General messages, like the way we mentioned earlier.
+3. Warning – For unexpected events.
+4. Error – For exceptions and errors.
+5. Critical – For failures that may need immediate attention.
+6. None - 	Specifies that a logging category should not write any messages.
+
+more info about Logging: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1#log-level
+
+great blog about logging with serilog: https://codewithmukesh.com/blog/serilog-in-aspnet-core-3-1/
