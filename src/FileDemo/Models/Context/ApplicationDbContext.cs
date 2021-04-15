@@ -14,7 +14,7 @@ namespace FileDemo.Models.Context
         }
 
         public DbSet<FileOnFileSystemModel> FilesOnFileSystem { get; set; }
-        public DbSet<FileOnDatabaseModel> FilesOnDatabaseModel { get; set; }
+        public DbSet<FileOnDatabaseModel> FilesOnDatabase { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {

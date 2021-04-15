@@ -9,7 +9,7 @@ namespace FileDemo.Models.Context
     public interface IApplicationDbContext
     {
         DbSet<FileOnFileSystemModel> FilesOnFileSystem { get; set; }
-        DbSet<FileOnDatabaseModel> FilesOnDatabaseModel { get; set; }
+        DbSet<FileOnDatabaseModel> FilesOnDatabase { get; set; }
 
         Task<int> SaveChangesAsync();
     }
