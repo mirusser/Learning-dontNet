@@ -85,3 +85,56 @@ else
         No Records Found
     </caption>
 }
+
+<hr />
+
+<h4>
+    Files on Database
+</h4>
+
+@if (Model.FilesOnDatabase != null && Model.FilesOnDatabase.Any())
+{
+    <caption>
+        List of Files on Database
+    </caption>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>File Type</th>
+                <th>Created On</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var file in Model.FilesOnDatabase)
+            {
+                <tr>
+                    <th>@file.Id</th>
+                    <td>@file.Name</td>
+                    <td>@file.Description</td>
+                    <td>@file.FileType</td>
+                    <td>@file.CreatedOn</td>
+                    <td>
+                        <a asp-controller="File" asp-action="DownloadFileFromDatabase" asp-route-id="@file.Id" type="button" class="btn btn-primary">
+                            Download
+                        </a>
+
+                        <a asp-controller="File" asp-action="DeleteFileFromDatabase" asp-route-id="@file.Id" type="button" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <caption>
+        No Records Found
+    </caption>
+}
