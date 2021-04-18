@@ -1,3 +1,4 @@
+using EmailDemo.Services;
 using EmailDemo.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,8 @@ namespace EmailDemo
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EmailDemo", Version = "v1" });
             });
+
+            services.AddTransient<IMailService, MailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
