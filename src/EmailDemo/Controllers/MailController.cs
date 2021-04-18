@@ -23,13 +23,29 @@ namespace EmailDemo.Controllers
         {
             try
             {
-                await _mailService.SendEmailAsync(request);
+                await _mailService.SendStandardEmailAsync(request);
                 return Ok();
             }
             catch (Exception ex)
             {
                 throw;
             }
+        }
+
+        [HttpPost("welcome")]
+        public async Task<IActionResult> SendWelcomeMail([FromForm] WelcomeRequest request)
+        {
+            try
+            {
+                await _mailService.SendWelcomeEmailAsync(request);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
     }
 }

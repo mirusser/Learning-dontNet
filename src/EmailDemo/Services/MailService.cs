@@ -22,7 +22,7 @@ namespace EmailDemo.Services
         }
 
 
-        private async Task<MimeMessage> CreateMimeMessage(MailRequest mailRequest)
+        private async Task<MimeMessage> CreateStandardMimeMessage(MailRequest mailRequest)
         {
             var email = new MimeMessage()
             {
@@ -59,10 +59,46 @@ namespace EmailDemo.Services
             return email;
         }
 
-        public async Task SendEmailAsync(MailRequest mailRequest)
+        private async Task<MimeMessage> CreateWelcomeMimeMessage(WelcomeRequest request)
         {
-            var email = await CreateMimeMessage(mailRequest);
+            var filePath = Directory.GetCurrentDirectory() + "\\Templates\\WelcomeTemplate.html";
+            StreamReader streamReader = new (filePath);
+            var mailText = streamReader.ReadToEnd();
+            streamReader.Close();
 
+            mailText = mailText.Replace("[username]", request.UserName).Replace("[email]", request.ToEmail);
+            var email = new MimeMessage
+            {
+                Sender = MailboxAddress.Parse(_mailSettings.Mail)
+            };
+
+            email.To.Add(MailboxAddress.Parse(request.ToEmail));
+            email.Subject = $"Welcome {request.UserName}";
+
+            var builder = new BodyBuilder
+            {
+                HtmlBody = mailText
+            };
+
+            email.Body = builder.ToMessageBody();
+
+            return email;
+        }
+
+        public async Task SendStandardEmailAsync(MailRequest request)
+        {
+            var welcomeEmail = await CreateStandardMimeMessage(request);
+            await SendEmailAsync(welcomeEmail);
+        }
+
+        public async Task SendWelcomeEmailAsync(WelcomeRequest request)
+        {
+            var welcomeEmail = await CreateWelcomeMimeMessage(request);
+            await SendEmailAsync(welcomeEmail);
+        }
+
+        public async Task SendEmailAsync(MimeMessage email)
+        {
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
             smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
