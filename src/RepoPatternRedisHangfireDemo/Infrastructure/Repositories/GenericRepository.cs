@@ -22,7 +22,8 @@ namespace Infrastructure.Repositories
             ApplicationDbContext dbContext, 
             Func<CacheTech, ICacheService> cacheService)
         {
-            _cacheTech = CacheTech.Memory;
+            _cacheTech = CacheTech.Redis;
+            //_cacheTech = CacheTech.Memory;
             _cacheKey = $"{typeof(T)}";
 
             _dbContext = dbContext;

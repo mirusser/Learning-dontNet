@@ -55,6 +55,12 @@ namespace Web
             services.AddTransient<MemoryCacheService>();
             services.AddTransient<RedisCacheService>();
 
+            //TODO:
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration.GetValue<string>($"{nameof(CacheConfiguration)}:{nameof(CacheConfiguration.RedistHost)}");
+            });
+
             services.AddTransient<Func<CacheTech, ICacheService>>(serviceProvider => key =>
             {
                 return key switch

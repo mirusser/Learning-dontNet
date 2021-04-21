@@ -16,7 +16,9 @@ namespace Infrastructure.Services
         private readonly CacheConfiguration _cacheConfig;
         private readonly MemoryCacheEntryOptions _cacheOptions;
 
-        public MemoryCacheService(IMemoryCache memoryCache, IOptions<CacheConfiguration> cacheConfig)
+        public MemoryCacheService(
+            IMemoryCache memoryCache, 
+            IOptions<CacheConfiguration> cacheConfig)
         {
             _memoryCache = memoryCache;
             _cacheConfig = cacheConfig.Value;
