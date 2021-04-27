@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Net.WebSockets;
 
 namespace WebSocketServer
 {
@@ -16,25 +17,50 @@ namespace WebSocketServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseWebSockets();
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            app.Use(async (context, next) =>
             {
-                endpoints.MapGet("/", async context =>
+                WriteRequestParam(context);
+
+                if (context.WebSockets.IsWebSocketRequest)
                 {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                    WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                    Console.WriteLine("WebSocket connected");
+                }
+                else
+                {
+                    Console.WriteLine("Hello from the the 2nd request delegate.");
+                    await next();
+                }
             });
+
+            app.Run(async (context) =>
+            {
+                Console.WriteLine("Hello from the the 3rd request delegate.");
+                await context.Response.WriteAsync("Hello from the the 3rd request delegate.");
+            });
+        }
+
+        public void WriteRequestParam(HttpContext context)
+        {
+            Console.WriteLine($"Request method: {context.Request.Method}");
+            Console.WriteLine($"Request method: {context.Request.Protocol}");
+
+            if (context.Request.Headers != null)
+            {
+                foreach (var header in context.Request.Headers)
+                {
+                    Console.WriteLine($" --> {header.Key} : {header.Value}");
+                }
+
+            }
         }
     }
 }
