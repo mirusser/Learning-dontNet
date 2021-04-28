@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.WebSockets;
 using System.Threading;
+using WebSocketServer.Middleware;
 
 namespace WebSocketServer
 {
@@ -26,35 +27,7 @@ namespace WebSocketServer
         {
             app.UseWebSockets();
 
-            app.Use(async (context, next) =>
-            {
-                WriteRequestParam(context);
-
-                if (context.WebSockets.IsWebSocketRequest)
-                {
-                    WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                    Console.WriteLine("WebSocket connected");
-
-                    await ReceiveMessage(webSocket, async (result, buffer) =>
-                    {
-                        if (result.MessageType == WebSocketMessageType.Text)
-                        {
-                            Console.WriteLine("Messagge received");
-                            return;
-                        }
-                        else if (result.MessageType == WebSocketMessageType.Close)
-                        {
-                            Console.WriteLine("Received close message");
-                            return;
-                        }
-                    });
-                }
-                else
-                {
-                    Console.WriteLine("Hello from the the 2nd request delegate.");
-                    await next();
-                }
-            });
+            app.UseWebSocketServer();
 
             app.Run(async (context) =>
             {
@@ -63,33 +36,6 @@ namespace WebSocketServer
             });
         }
 
-        public void WriteRequestParam(HttpContext context)
-        {
-            Console.WriteLine($"Request method: {context.Request.Method}");
-            Console.WriteLine($"Request method: {context.Request.Protocol}");
 
-            if (context.Request.Headers != null)
-            {
-                foreach (var header in context.Request.Headers)
-                {
-                    Console.WriteLine($" --> {header.Key} : {header.Value}");
-                }
-            }
-        }
-
-        private async Task ReceiveMessage(
-            WebSocket socket,
-            Action<WebSocketReceiveResult, byte[]> handleMessage)
-        {
-            var buffer = new byte[1024 * 4];
-
-            while (socket.State == WebSocketState.Open)
-            {
-                var result =
-                    await socket.ReceiveAsync(buffer: new ArraySegment<byte>(buffer), cancellationToken: CancellationToken.None);
-
-                handleMessage(result, buffer);
-            }
-        }
     }
 }
