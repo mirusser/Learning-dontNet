@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using WebSocketServer.Managers;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace WebSocketServer.Middleware
 {
@@ -33,17 +35,30 @@ namespace WebSocketServer.Middleware
                 Console.WriteLine("WebSocket connected");
 
                 string connId = _manager.AddSocket(webSocket);
+                await SendConnIdAsync(webSocket, connId);
 
-                await ReceiveMessage(webSocket, async (result, buffer) =>
+                await ReceiveMessageAsync(webSocket, async (result, buffer) =>
                 {
                     if (result.MessageType == WebSocketMessageType.Text)
                     {
-                        Console.WriteLine($"Message received: {Encoding.UTF8.GetString(buffer, 0, result.Count)}");
+                        var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                        Console.WriteLine($"Message received: {message}");
+                        await RouteJSONMessageAsync(message);
                         return;
                     }
                     else if (result.MessageType == WebSocketMessageType.Close)
                     {
                         Console.WriteLine("Received close message");
+
+                        string id = _manager.GetAllSockets().FirstOrDefault(s => s.Value == webSocket).Key;
+
+                        _manager.GetAllSockets().TryRemove(id, out WebSocket socket);
+
+                        await socket.CloseAsync(
+                            result.CloseStatus.Value, 
+                            result.CloseStatusDescription, 
+                            CancellationToken.None);
+
                         return;
                     }
                 });
@@ -55,7 +70,14 @@ namespace WebSocketServer.Middleware
             }
         }
 
-        public void WriteRequestParam(HttpContext context)
+        private async Task SendConnIdAsync(WebSocket socket, string connId)
+        {
+            var buffer = Encoding.UTF8.GetBytes($"ConnId: {connId}");
+
+            await socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+
+        private void WriteRequestParam(HttpContext context)
         {
             Console.WriteLine($"Request method: {context.Request.Method}");
             Console.WriteLine($"Request method: {context.Request.Protocol}");
@@ -69,7 +91,7 @@ namespace WebSocketServer.Middleware
             }
         }
 
-        private async Task ReceiveMessage(
+        private async Task ReceiveMessageAsync(
             WebSocket socket,
             Action<WebSocketReceiveResult, byte[]> handleMessage)
         {
@@ -83,6 +105,49 @@ namespace WebSocketServer.Middleware
                         cancellationToken: CancellationToken.None);
 
                 handleMessage(result, buffer);
+            }
+        }
+
+        public async Task RouteJSONMessageAsync(string message)
+        {
+            //var routeOb = System.Text.Json.JsonSerializer.Deserialize<dynamic>(message);
+            var routeOb = JsonConvert.DeserializeObject<dynamic>(message);
+
+            if (routeOb.To != null && Guid.TryParse(routeOb.To.ToString(), out Guid guidOutput))
+            {
+                Console.WriteLine("Targeted message");
+                var socket = _manager.GetAllSockets().FirstOrDefault(s => s.Key == routeOb.To.ToString());
+
+                if (socket.Value != null)
+                {
+                    if (socket.Value.State == WebSocketState.Open)
+                    {
+                        await socket.Value.SendAsync(
+                            Encoding.UTF8.GetBytes(routeOb.Message.ToString()),
+                            WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid recipent");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Broadcast");
+                foreach (var socket in _manager.GetAllSockets())
+                {
+                    if (socket.Value.State == WebSocketState.Open)
+                    {
+                        await socket.Value.SendAsync(
+                            Encoding.UTF8.GetBytes(routeOb.Message.ToString()),
+                            WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None);
+                    }
+                }
             }
         }
     }

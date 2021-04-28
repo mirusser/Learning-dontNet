@@ -125,6 +125,8 @@
                 '<td>Client</td>' +
                 '<td>' + htmlEscape(event.data) + '</td>' +
                 '</tr>';
+
+            isConnId(event.data);
         }
     };
 
@@ -145,7 +147,7 @@
             return;
         }
 
-        var data = sendMessage.value;
+        var data = constructJSON();
         socket.send(data);
 
         commsLog.innerHTML +=
@@ -155,6 +157,23 @@
             '<td>' + htmlEscape(data) + '</td>' +
             '</tr>';
     };
+
+    function isConnId(str) {
+
+        if (str.substring(0, 7) == "ConnId:") {
+
+            connID.innerHTML = str;
+        }
+    }
+
+    function constructJSON() {
+
+        return JSON.stringify({
+            "From": connID.innerHTML.substring(8, connID.innerHTML.length),
+            "To": recipents.value,
+            "Message": sendMessage.value
+        });
+    }
 
     function updateState() {
         function disable() {
