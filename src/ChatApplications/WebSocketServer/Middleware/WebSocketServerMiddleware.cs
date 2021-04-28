@@ -6,16 +6,21 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using WebSocketServer.Managers;
 
 namespace WebSocketServer.Middleware
 {
     public class WebSocketServerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly IWebSocketServerConnectionManager _manager;
 
-        public WebSocketServerMiddleware(RequestDelegate next)
+        public WebSocketServerMiddleware(
+            RequestDelegate next,
+            IWebSocketServerConnectionManager manager)
         {
             _next = next;
+            _manager = manager;
         }
 
         public async Task Invoke(HttpContext context)
@@ -27,12 +32,13 @@ namespace WebSocketServer.Middleware
                 WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
                 Console.WriteLine("WebSocket connected");
 
+                string connId = _manager.AddSocket(webSocket);
+
                 await ReceiveMessage(webSocket, async (result, buffer) =>
                 {
                     if (result.MessageType == WebSocketMessageType.Text)
                     {
-                        Console.WriteLine("Messagge received");
-                        Console.WriteLine($"Message: {Encoding.UTF8.GetString(buffer, 0, result.Count)}");
+                        Console.WriteLine($"Message received: {Encoding.UTF8.GetString(buffer, 0, result.Count)}");
                         return;
                     }
                     else if (result.MessageType == WebSocketMessageType.Close)
