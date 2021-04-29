@@ -1,0 +1,6 @@
+
+1. Powershell command to install 'libman':
+    `dotnet tool install -g Microsoft.Web.LibraryManager.cli`
+
+2. Powershell command to add 'signalr.js' file:
+    `libman install @aspnet/signalr@next -p unpkg -d lib/signalr --files dist/browser/signalr.js`
