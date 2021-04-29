@@ -13,7 +13,7 @@ namespace SignalRServer.Hubs
         {
             Console.WriteLine($"Connection Established, connection Id: {Context.ConnectionId}");
 
-            Clients.Client(Context.ConnectionId).SendAsync($"Received connection Id: {Context.ConnectionId}");
+            Clients.Client(Context.ConnectionId).SendAsync($"ReceivedConnectionId", Context.ConnectionId);
 
             return base.OnConnectedAsync();
         }

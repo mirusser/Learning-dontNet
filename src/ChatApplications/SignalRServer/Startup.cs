@@ -27,6 +27,8 @@ namespace SignalRServer
                 .AllowAnyMethod()
                 .AllowCredentials());
 
+            app.UseRouting();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<ChatHub>("/chatHub");
