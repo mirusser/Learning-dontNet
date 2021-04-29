@@ -209,6 +209,10 @@
                     stateLabel.innerHTML = "Closing...";
                     disable();
                     break;
+                case WebSocket.CONNECTING:
+                    stateLabel.innerHTML = "Connecting...";
+                    disable();
+                    break;
                 case WebSocket.OPEN:
                     stateLabel.innerHTML = "Open";
                     enable();
