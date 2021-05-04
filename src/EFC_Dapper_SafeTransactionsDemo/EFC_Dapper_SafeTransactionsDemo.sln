@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{8A018B63-C115-4F46-982F-9883307BCEDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{B26E29E4-FA15-4F01-9B8F-96387BDADF97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{D12EB865-F44A-43E0-9FD7-3E51E1DF4CFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A018B63-C115-4F46-982F-9883307BCEDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A018B63-C115-4F46-982F-9883307BCEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A018B63-C115-4F46-982F-9883307BCEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A018B63-C115-4F46-982F-9883307BCEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B26E29E4-FA15-4F01-9B8F-96387BDADF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B26E29E4-FA15-4F01-9B8F-96387BDADF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B26E29E4-FA15-4F01-9B8F-96387BDADF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B26E29E4-FA15-4F01-9B8F-96387BDADF97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D12EB865-F44A-43E0-9FD7-3E51E1DF4CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D12EB865-F44A-43E0-9FD7-3E51E1DF4CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D12EB865-F44A-43E0-9FD7-3E51E1DF4CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D12EB865-F44A-43E0-9FD7-3E51E1DF4CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B20CCB02-2177-4F71-934B-1657B8457763}
+	EndGlobalSection
+EndGlobal
