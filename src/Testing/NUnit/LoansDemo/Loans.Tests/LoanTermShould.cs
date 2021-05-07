@@ -23,6 +23,7 @@ namespace Loans.Tests
         [Ignore("Need to complete update work")] 
         public void StoreYears()
         {
+            //'sut' stands for: 'System Under Test'
             var sut = new LoanTerm(1);
 
             Assert.That(sut.Years, Is.EqualTo(1));

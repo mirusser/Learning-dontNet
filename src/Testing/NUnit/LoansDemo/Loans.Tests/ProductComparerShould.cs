@@ -9,22 +9,54 @@ using System.Threading.Tasks;
 namespace Loans.Tests
 {
     [TestFixture]
+    [Category("Product Comparison")]
     public class ProductComparerShould
     {
-        [Test]
-        public void ReturnCorrectNumberOfComparisons()
+        private List<LoanProduct> _products;
+        private ProductComparer _sut;
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
-            var products = new List<LoanProduct>
+            //Simulate long setup init time for this list of products
+            //We assume that this list will not be modified by any tests
+            //as this will potentially break other tests (i.e. break test isolation)
+            _products = new List<LoanProduct>
             {
                 new LoanProduct(1, "a", 1),
                 new LoanProduct(2, "b", 2),
                 new LoanProduct(3, "c", 3)
             };
+        }
 
-            var sut = new ProductComparer(new LoanAmount("US", 200_000m), products);
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            //Run after last test in this text class (fixture) executes
+            //e.g. disposing of shared expensive setup performed in OneTimeSetUp
 
-            List<MonthlyRepaymentComparison> comparisions = 
-                sut.CompareMonthlyRepayments(new LoanTerm(30));
+            //_products.Dispose(); e.g. if products implemented IDisposable
+        }
+
+        [SetUp]
+        public void Setup()
+        {
+            _sut = new ProductComparer(new LoanAmount("US", 200_000m), _products);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            //Runs after each test executes
+            //for example: sut.Dispose();
+        }
+
+        [Test]
+        //[Category("Product Comparison")]
+        public void ReturnCorrectNumberOfComparisons()
+        {
+            List<MonthlyRepaymentComparison> comparisions =
+                _sut.CompareMonthlyRepayments(new LoanTerm(30));
 
             Assert.That(comparisions, Has.Exactly(3).Items);
         }
@@ -32,17 +64,8 @@ namespace Loans.Tests
         [Test]
         public void NotReturnDuplicateComparisons()
         {
-            var products = new List<LoanProduct>
-            {
-                new LoanProduct(1, "a", 1),
-                new LoanProduct(2, "b", 2),
-                new LoanProduct(3, "c", 3)
-            };
-
-            var sut = new ProductComparer(new LoanAmount("US", 200_000m), products);
-
             List<MonthlyRepaymentComparison> comparisions =
-                sut.CompareMonthlyRepayments(new LoanTerm(30));
+                _sut.CompareMonthlyRepayments(new LoanTerm(30));
 
             Assert.That(comparisions, Is.Unique);
         }
@@ -50,18 +73,9 @@ namespace Loans.Tests
         [Test]
         public void ReturnComparisonForFirstProduct()
         {
-            var products = new List<LoanProduct>
-            {
-                new LoanProduct(1, "a", 1),
-                new LoanProduct(2, "b", 2),
-                new LoanProduct(3, "c", 3)
-            };
-
-            var sut = new ProductComparer(new LoanAmount("US", 200_000m), products);
-
             //Need to also to know the expected monthly repayment
             List<MonthlyRepaymentComparison> comparisions =
-                sut.CompareMonthlyRepayments(new LoanTerm(30));
+                _sut.CompareMonthlyRepayments(new LoanTerm(30));
 
             var expectedProduct = new MonthlyRepaymentComparison("a", 1, 643.28m);
 
@@ -71,17 +85,8 @@ namespace Loans.Tests
         [Test]
         public void ReturnComparisonForFirstProductWithPartialKnownExpectedValues()
         {
-            var products = new List<LoanProduct>
-            {
-                new LoanProduct(1, "a", 1),
-                new LoanProduct(2, "b", 2),
-                new LoanProduct(3, "c", 3)
-            };
-
-            var sut = new ProductComparer(new LoanAmount("US", 200_000m), products);
-
             List<MonthlyRepaymentComparison> comparisions =
-                sut.CompareMonthlyRepayments(new LoanTerm(30));
+                _sut.CompareMonthlyRepayments(new LoanTerm(30));
 
             //Don't care about the expected monthly repayment,
             //only thtat the product is there
