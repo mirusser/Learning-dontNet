@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Loans.Tests
 {
-    [TestFixture]
     public class LoanTermShould
     {
         [Test]
@@ -19,7 +18,9 @@ namespace Loans.Tests
             Assert.That(sut.ToMonths(), Is.EqualTo(12), "Months should be 12 * number of years");
         }
 
+        //with this attribute ('Ignore') this test will be skipped
         [Test]
+        [Ignore("Need to complete update work")] 
         public void StoreYears()
         {
             var sut = new LoanTerm(1);
