@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Loans.Tests
 {
-    [Category("Product Comparison")]
+    [ProductComparison]
+    //[Category("Product Comparison")]
     public class MonthlyRepaymentComparisonShould
     {
         [Test]

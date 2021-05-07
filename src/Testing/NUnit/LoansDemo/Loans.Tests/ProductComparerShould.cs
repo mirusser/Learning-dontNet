@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace Loans.Tests
 {
     [TestFixture]
-    [Category("Product Comparison")]
+    [ProductComparison]
+    //[Category("Product Comparison")]
     public class ProductComparerShould
     {
         private List<LoanProduct> _products;
@@ -101,12 +102,14 @@ namespace Loans.Tests
             //                                .Property("MonthlyRepayment")
             //                                .GreaterThan(0));
 
-            Assert.That(comparisions, Has.Exactly(1)
-                                        .Matches<MonthlyRepaymentComparison>(
-                                        item => 
-                                            item.ProductName == "a" && 
-                                            item.InterestRate == 1 && 
-                                            item.MonthlyRepayment > 0));
+            //Assert.That(comparisions, Has.Exactly(1)
+            //                            .Matches<MonthlyRepaymentComparison>(
+            //                            item => 
+            //                                item.ProductName == "a" && 
+            //                                item.InterestRate == 1 && 
+            //                                item.MonthlyRepayment > 0));
+
+            Assert.That(comparisions, Has.Exactly(1).Matches(new MonthlyRepaymentGreaterThanZeroConstraint("a", 1)));
         }
     }
 }
