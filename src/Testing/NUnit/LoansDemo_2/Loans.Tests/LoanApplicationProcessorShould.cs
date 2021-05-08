@@ -129,8 +129,92 @@ namespace Loans.Tests
 
             sut.Process(application);
 
+            //veryfing that getter was called
+            mockCreditScorer.VerifyGet(x => x.ScoreResult.ScoreValue.Score, Times.Once);
+
+            //veryfing that setter was called (with value that was set)
+            mockCreditScorer.VerifySet(x => x.Count = 1, Times.Once);
+
+
             Assert.That(application.GetIsAccepted(), Is.True);
             Assert.That(mockCreditScorer.Object.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void InitializeIdentity()
+        {
+            LoanProduct product = new(99, "Loan", 5.25m);
+            LoanAmount amount = new("USD", 200_000);
+            LoanApplication application =
+                new(42,
+                    product,
+                    amount,
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah",
+                    65_000);
+
+            var mockIdentityVerifier = new Mock<IIdentityVerifier>();
+
+            mockIdentityVerifier
+                .Setup(x => x.Validate(
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah"))
+                .Returns(true);
+
+            var mockCreditScorer = new Mock<ICreditScorer>();
+            mockCreditScorer.SetupAllProperties();
+            mockCreditScorer.Setup(x => x.ScoreResult.ScoreValue.Score).Returns(300);
+
+            //system under test
+            var sut = new LoanApplicationProcessor(mockIdentityVerifier.Object, mockCreditScorer.Object);
+
+            sut.Process(application);
+
+            //veryfing that method (without parameters) was called/exeucted at least once
+            mockIdentityVerifier.Verify(x => x.Initialize());
+
+            mockIdentityVerifier.Verify(x => x.Validate(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>()));
+
+            mockIdentityVerifier.VerifyNoOtherCalls();
+        }
+
+        [Test]
+        public void CalculateCall()
+        {
+            LoanProduct product = new(99, "Loan", 5.25m);
+            LoanAmount amount = new("USD", 200_000);
+            LoanApplication application =
+                new(42,
+                    product,
+                    amount,
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah",
+                    65_000);
+
+            var mockIdentityVerifier = new Mock<IIdentityVerifier>();
+
+            mockIdentityVerifier
+                .Setup(x => x.Validate(
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah"))
+                .Returns(true);
+
+            var mockCreditScorer = new Mock<ICreditScorer>();
+            mockCreditScorer.SetupAllProperties();
+            mockCreditScorer.Setup(x => x.ScoreResult.ScoreValue.Score).Returns(300);
+
+            //system under test
+            var sut = new LoanApplicationProcessor(mockIdentityVerifier.Object, mockCreditScorer.Object);
+
+            sut.Process(application);
+
+            //veryfing that method (without parameters) was called/exeucted at least once
+            //mockCreditScorer.Verify(x => x.CalculateScore(It.IsAny<string>(), It.IsAny<string>()));
+            mockCreditScorer.Verify(x => x.CalculateScore("Sarah", "133 Pluralsight Drive, Draper, Utah"), times: Times.AtLeastOnce);
         }
 
         //Configuring mock methods to return null
