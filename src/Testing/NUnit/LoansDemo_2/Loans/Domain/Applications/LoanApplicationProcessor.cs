@@ -38,10 +38,10 @@ namespace Loans.Domain.Applications
 
             _identityVerifier.Initialize();
 
-            //var isValidIdentity = _identityVerifier.Validate(
-            //    application.GetApplicantName(), 
-            //    application.GetApplicantAge(), 
-            //    application.GetApplicantAddress());
+            var isValidIdentity = _identityVerifier.Validate(
+                application.GetApplicantName(),
+                application.GetApplicantAge(),
+                application.GetApplicantAddress());
 
             //_identityVerifier.Validate(
             //    application.GetApplicantName(),
@@ -49,28 +49,36 @@ namespace Loans.Domain.Applications
             //    application.GetApplicantAddress(), 
             //    out bool isValidIdentity);
 
-            //if (!isValidIdentity)
-            //{
-            //    application.Decline();
-            //    return;
-            //}
-
-            IdentityVerificationStatus status = null;
-            _identityVerifier.Validate(
-                application.GetApplicantName(),
-                application.GetApplicantAge(),
-                application.GetApplicantAddress(),
-                ref status);
-
-            if (!status.Passed)
+            if (!isValidIdentity)
             {
                 application.Decline();
                 return;
             }
 
-            //_creditScorer.CalculateScore(
-            //    application.GetApplicantName(), 
-            //    application.GetApplicantAddress());
+            //IdentityVerificationStatus status = null;
+            //_identityVerifier.Validate(
+            //    application.GetApplicantName(),
+            //    application.GetApplicantAge(),
+            //    application.GetApplicantAddress(),
+            //    ref status);
+
+            //if (!status.Passed)
+            //{
+            //    application.Decline();
+            //    return;
+            //}
+
+            _creditScorer.CalculateScore(
+                application.GetApplicantName(),
+                application.GetApplicantAddress());
+
+            _creditScorer.Count++;
+
+            if (_creditScorer.ScoreResult.ScoreValue.Score < MinimumCreditScore)
+            {
+                application.Decline();
+                return;
+            }
 
             //if (_creditScorer.Score < MinimumCreditScore)
             //{
