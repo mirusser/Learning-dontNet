@@ -10,15 +10,15 @@ namespace Loans.Domain.Applications
 
         private readonly IIdentityVerifier _identityVerifier;
         private readonly ICreditScorer _creditScorer;
-        
+
         public LoanApplicationProcessor(
-            IIdentityVerifier identityVerifier, 
+            IIdentityVerifier identityVerifier,
             ICreditScorer creditScorer)
         {
-            _identityVerifier = 
+            _identityVerifier =
                 identityVerifier ?? throw new ArgumentNullException(nameof(identityVerifier));
 
-            _creditScorer = 
+            _creditScorer =
                 creditScorer ?? throw new ArgumentNullException(nameof(creditScorer));
         }
 
@@ -68,9 +68,18 @@ namespace Loans.Domain.Applications
             //    return;
             //}
 
-            _creditScorer.CalculateScore(
-                application.GetApplicantName(),
-                application.GetApplicantAddress());
+            try
+            {
+                _creditScorer.CalculateScore(
+                    application.GetApplicantName(),
+                    application.GetApplicantAddress());
+            }
+            catch
+            {
+
+                application.Decline();
+                return;
+            }
 
             _creditScorer.Count++;
 

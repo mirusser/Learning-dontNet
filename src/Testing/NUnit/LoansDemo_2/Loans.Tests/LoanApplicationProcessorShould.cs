@@ -4,6 +4,7 @@ using System.Text;
 using Loans.Domain.Applications;
 using NUnit.Framework;
 using Moq;
+using Moq.Protected;
 
 namespace Loans.Tests
 {
@@ -215,6 +216,109 @@ namespace Loans.Tests
             //veryfing that method (without parameters) was called/exeucted at least once
             //mockCreditScorer.Verify(x => x.CalculateScore(It.IsAny<string>(), It.IsAny<string>()));
             mockCreditScorer.Verify(x => x.CalculateScore("Sarah", "133 Pluralsight Drive, Draper, Utah"), times: Times.AtLeastOnce);
+        }
+
+        //Throwing exception from Mock Object
+        [Test]
+        public void DeclineWhenCreditScoreError()
+        {
+            LoanProduct product = new(99, "Loan", 5.25m);
+            LoanAmount amount = new("USD", 200_000);
+            LoanApplication application =
+                new(42,
+                    product,
+                    amount,
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah",
+                    65_000);
+
+            var mockIdentityVerifier = new Mock<IIdentityVerifier>();
+
+            mockIdentityVerifier
+                .Setup(x => x.Validate(
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah"))
+                .Returns(true);
+
+            var mockCreditScorer = new Mock<ICreditScorer>();
+
+            mockCreditScorer
+                .Setup(x => x.ScoreResult.ScoreValue.Score)
+                .Returns(300);
+
+            mockCreditScorer
+                .Setup(x => x.CalculateScore(It.IsAny<string>(), It.IsAny<string>()))
+                .Throws<InvalidOperationException>();
+
+            //system under test
+            var sut = new LoanApplicationProcessor(mockIdentityVerifier.Object, mockCreditScorer.Object);
+
+            sut.Process(application);
+
+            Assert.That(application.GetIsAccepted(), Is.False);
+        }
+
+        interface IIdentityVerifierServieGetewayProtectedMember
+        {
+            DateTime GetCurrentTime();
+            bool CallService(string applicantName, int applicantAge, string applicantAddress);
+        }
+
+        [Test]
+        public void AcceptUsingPartialMock()
+        {
+            LoanProduct product = new(99, "Loan", 5.25m);
+            LoanAmount amount = new("USD", 200_000);
+            LoanApplication application =
+                new(42,
+                    product,
+                    amount,
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah",
+                    65_000);
+
+            var mockIdentityVerifier = new Mock<IdentityVerifierServiceGateway>();
+
+            //mockIdentityVerifier
+            //    .Protected()
+            //    .Setup<bool>("CallService",
+            //        "Sarah",
+            //        25,
+            //        "133 Pluralsight Drive, Draper, Utah")
+            //    .Returns(true);
+ 
+            mockIdentityVerifier
+                .Protected()
+                .As<IIdentityVerifierServieGetewayProtectedMember>()
+                .Setup(x => x.CallService(
+                    "Sarah",
+                    25,
+                    "133 Pluralsight Drive, Draper, Utah"))
+                .Returns(true);
+
+            var expectedTime = new DateTime(2000, 1, 1);
+
+            mockIdentityVerifier
+                .Protected()
+                .Setup<DateTime>("GetCurrentTime")
+                .Returns(expectedTime);
+
+            var mockCreditScorer = new Mock<ICreditScorer>();
+
+            mockCreditScorer
+                .Setup(x => x.ScoreResult.ScoreValue.Score)
+                .Returns(300);
+
+            //system under test
+            var sut = new LoanApplicationProcessor(mockIdentityVerifier.Object, mockCreditScorer.Object);
+
+            sut.Process(application);
+
+            Assert.That(application.GetIsAccepted(), Is.True);
+            Assert.That(mockIdentityVerifier.Object.LastCheckTime, Is.EqualTo(expectedTime));
         }
 
         //Configuring mock methods to return null
