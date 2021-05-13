@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DeskBooker.Core.Processor
 {
-    public class DeskBookingRequestProcessor
+    public class DeskBookingRequestProcessor : IDeskBookingRequestProcessor
     {
         private readonly IDeskBookingRepository _deskBookingRepository;
         private readonly IDeskRepository _deskRepository;
@@ -29,7 +29,7 @@ namespace DeskBooker.Core.Processor
 
             var availableDesks = _deskRepository.GetAvailableDesks(request.Date);
 
-            if (availableDesks != null && availableDesks.FirstOrDefault() is Desk availableDesk) 
+            if (availableDesks != null && availableDesks.FirstOrDefault() is Desk availableDesk)
             {
                 var deskBooking = Create<DeskBooking>(request);
                 deskBooking.DeskId = availableDesk.Id;

@@ -1,4 +1,5 @@
 using DeskBooker.Core.DataInterfaces;
+using DeskBooker.Core.Processor;
 using DeskBooker.DataAccess;
 using DeskBooker.DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -51,6 +52,9 @@ namespace DeskBooker.Web
             //repos
             services.AddTransient<IDeskRepository, DeskRepository>();
             services.AddTransient<IDeskBookingRepository, DeskBookingRepository>();
+
+
+            services.AddTransient<IDeskBookingRequestProcessor, DeskBookingRequestProcessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
