@@ -33,7 +33,6 @@ namespace DeskBooker.Core.Processor
 
             _deskBookingRepositoryMock = new Mock<IDeskBookingRepository>();
 
-
             _deskRepositoryMock = new Mock<IDeskRepository>();
             _deskRepositoryMock
                 .Setup(x => x.GetAvailableDesks(_request.Date))
