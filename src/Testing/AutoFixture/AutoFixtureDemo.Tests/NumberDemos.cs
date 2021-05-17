@@ -22,5 +22,21 @@ namespace AutoFixtureDemo.Tests
 
             Assert.That(sut.Value, Is.LessThan(0));
         }
+
+        [Test]
+        public void Decimals()
+        {
+            //arrange
+            var fixture = new Fixture();
+            var sut = new DecimalCalculator();
+
+            var num = fixture.Create<decimal>();
+
+            //act
+            sut.Add(num);
+
+            //assert
+            Assert.That(num, Is.EqualTo(sut.Value));
+        }
     }
 }
