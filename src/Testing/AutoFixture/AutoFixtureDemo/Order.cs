@@ -15,6 +15,12 @@ namespace AutoFixtureDemo
             Customer = customer;
             Items = new List<OrderItem>();
         }
+
+        public override string ToString()
+        {
+            return $"{Id}-{Customer.CustomerName}";
+        }
+
     }
 
     public class OrderItem
