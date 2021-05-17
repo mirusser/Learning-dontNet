@@ -10,6 +10,7 @@ namespace AutoFixtureDemo
         [StringLength(8)]
         public string GameCharacterName { get; set; }
 
+        [Range(0, 100)]
         public int CurrentHealth { get; set; }
     }
 }
