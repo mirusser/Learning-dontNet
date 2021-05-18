@@ -21,7 +21,8 @@ namespace AutoFixtureDemo.Tests
                 new EmailMessage(
                     It.IsAny<string>(),
                     It.IsAny<string>(),
-                    It.IsAny<bool>())
+                    It.IsAny<bool>(),
+                    It.IsAny<string>())
                 {
                     Subject = "Hi"
                 };

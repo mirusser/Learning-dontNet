@@ -16,11 +16,16 @@ namespace AutoFixtureDemo
 
         public EmailMessageType MessageType { get; set; }
 
-        public EmailMessage(string toAddress, string messageBody, bool isImportant)
+        public EmailMessage(
+            string toAddress, 
+            string messageBody, 
+            bool isImportant,
+            string subject)
         {
             ToAddress = toAddress;
             MessageBody = messageBody;
             IsImportant = isImportant;
+            Subject = subject;
         }
     }
 }

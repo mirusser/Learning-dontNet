@@ -18,7 +18,8 @@ namespace AutoFixtureDemo.Tests
                 new EmailMessage(
                     fixture.Create<string>(),
                     fixture.Create<string>(),
-                    fixture.Create<bool>())
+                    fixture.Create<bool>(),
+                    fixture.Create<string>())
                 {
                     Id = fixture.Create<Guid>()
                 };
