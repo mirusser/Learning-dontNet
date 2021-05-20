@@ -11,7 +11,7 @@ namespace TennisBookings.Merchandise.Api.IntegrationTests
 {
     public class HealthCheckTests 
     {
-        WebApplicationFactory<Startup> _factory;
+        private WebApplicationFactory<Startup> _factory;
         private HttpClient _httpClient;
 
         [OneTimeSetUp]
