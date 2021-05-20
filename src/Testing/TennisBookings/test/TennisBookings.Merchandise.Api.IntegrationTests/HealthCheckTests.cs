@@ -11,14 +11,15 @@ namespace TennisBookings.Merchandise.Api.IntegrationTests
 {
     public class HealthCheckTests 
     {
+        WebApplicationFactory<Startup> _factory;
         private HttpClient _httpClient;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            WebApplicationFactory<Startup> factory = new();
+            _factory = new();
 
-            _httpClient = factory.CreateDefaultClient();
+            _httpClient = _factory.CreateDefaultClient();
         }
 
         [Test]
@@ -28,6 +29,13 @@ namespace TennisBookings.Merchandise.Api.IntegrationTests
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             //response.EnsureSuccessStatusCode();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            _httpClient.Dispose();
+            _factory.Dispose();
         }
     }
 }
