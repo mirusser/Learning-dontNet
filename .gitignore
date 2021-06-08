@@ -442,3 +442,4 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 /src/FileDemo/Files
 /src/EmailDemo/appsettings.Development.json
+/src/FluenValidationDemo/FluentValidation.WebApi/appsettings.Development.json
