@@ -1,4 +1,6 @@
 using CQRS_with_MediatR.Context;
+using CQRS_with_MediatR.PipelineBehaviours;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +32,6 @@ namespace CQRS_with_MediatR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             #region Swagger
             services.AddSwaggerGen(c =>
             {
@@ -51,6 +52,10 @@ namespace CQRS_with_MediatR
             services.AddScoped<IApplicationContext>(provider => provider.GetService<ApplicationContext>());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddControllers();
+
+            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
