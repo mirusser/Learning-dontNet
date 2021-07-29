@@ -1,4 +1,5 @@
 using GraphQLDemo.Data;
+using GraphQLDemo.GprahQL;
 using GraphQLDemo.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,10 @@ namespace GraphQLDemo
             {
                 opt.UseSqlServer(Configuration.GetConnectionString(nameof(ConnectionStrings.GraphQLDemoConnection)));
             });
+
+            services
+                .AddGraphQLServer()
+                .AddQueryType<Query>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,10 +51,10 @@ namespace GraphQLDemo
 
             app.UseRouting();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGraphQL();
+            });
         }
     }
 }

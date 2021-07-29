@@ -7,6 +7,6 @@ namespace GraphQLDemo.Settings
 {
     public class ConnectionStrings
     {
-        public string GraphQLDemoConnection { get; set; }
+        public string GraphQLDemoConnection { get; set; } = string.Empty;
     }
 }
