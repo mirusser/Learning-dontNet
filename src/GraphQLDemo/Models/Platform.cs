@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using HotChocolate;
 
 namespace GraphQLDemo.Models
 {
+    [GraphQLDescription("Represents any software or service that has a command line interface")]
     public class Platform
     {
         [Key]
@@ -13,11 +15,10 @@ namespace GraphQLDemo.Models
 
         [Required]
         public string Name { get; set; } = string.Empty;
+
+        [GraphQLDescription("Represents a purchased, valid license for the platform")]
         public string? LicenseKey { get; set; }
 
-        //public Platform(string name)
-        //{
-        //    Name = name;
-        //}
+        public ICollection<Command> Commands { get; set; } = new List<Command>();
     }
 }

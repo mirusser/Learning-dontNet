@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraphQL.Server.Ui.Voyager;
 
 namespace GraphQLDemo
 {
@@ -29,14 +30,15 @@ namespace GraphQLDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opt =>
+            services.AddPooledDbContextFactory<AppDbContext>(opt =>
             {
                 opt.UseSqlServer(Configuration.GetConnectionString(nameof(ConnectionStrings.GraphQLDemoConnection)));
             });
 
             services
                 .AddGraphQLServer()
-                .AddQueryType<Query>();
+                .AddQueryType<Query>()
+                .AddProjections();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +57,11 @@ namespace GraphQLDemo
             {
                 endpoints.MapGraphQL();
             });
+
+            app.UseGraphQLVoyager(new VoyagerOptions()
+            {
+                GraphQLEndPoint = "/graphql"
+            }, "/graphql-voyager");
         }
     }
 }
