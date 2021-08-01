@@ -12,14 +12,14 @@ namespace GraphQLDemo.GprahQL
     public class Query
     {
         [UseDbContext(typeof(AppDbContext))]
-        [UseProjection]
+        //[UseProjection] - do not use attribute with code first approach (when using resolver/resolvers)
         public IQueryable<Platform> GetPlatform([ScopedService] AppDbContext context)
         {
             return context.Platforms;
         }
 
         [UseDbContext(typeof(AppDbContext))]
-        [UseProjection]
+        //[UseProjection] - do not use attribute with code first approach (when using resolver/resolvers)
         public IQueryable<Command> GetCommand([ScopedService] AppDbContext context)
         {
             return context.Commands;

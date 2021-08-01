@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GraphQL.Server.Ui.Voyager;
 using GraphQLDemo.GprahQL.Platforms;
+using GraphQLDemo.GprahQL.Commands;
 
 namespace GraphQLDemo
 {
@@ -40,7 +41,8 @@ namespace GraphQLDemo
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<PlatformType>()
-                .AddProjections();
+                .AddType<CommandType>();
+                //.AddProjections(); - use projections when using annotations approach
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
