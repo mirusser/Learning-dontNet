@@ -41,7 +41,9 @@ namespace GraphQLDemo
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<PlatformType>()
-                .AddType<CommandType>();
+                .AddType<CommandType>()
+                .AddFiltering()
+                .AddSorting();
                 //.AddProjections(); - use projections when using annotations approach
         }
 

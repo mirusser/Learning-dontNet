@@ -12,6 +12,8 @@ namespace GraphQLDemo.GprahQL
     public class Query
     {
         [UseDbContext(typeof(AppDbContext))]
+        [UseFiltering]
+        [UseSorting]
         //[UseProjection] - do not use attribute with code first approach (when using resolver/resolvers)
         public IQueryable<Platform> GetPlatform([ScopedService] AppDbContext context)
         {
@@ -19,6 +21,8 @@ namespace GraphQLDemo.GprahQL
         }
 
         [UseDbContext(typeof(AppDbContext))]
+        [UseFiltering]
+        [UseSorting]
         //[UseProjection] - do not use attribute with code first approach (when using resolver/resolvers)
         public IQueryable<Command> GetCommand([ScopedService] AppDbContext context)
         {
