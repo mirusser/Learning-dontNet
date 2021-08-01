@@ -1,0 +1,7 @@
+﻿
+relay specification: https://relay.dev/docs/guides/graphql-server-specification/
+(idealized way of implementing GraphQL - or so I've heard)
+
+data loader pattern: 
+https://xuorig.medium.com/the-graphql-dataloader-pattern-visualized-3064a00f319f
+https://github.com/graphql/dataloader
