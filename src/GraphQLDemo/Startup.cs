@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GraphQL.Server.Ui.Voyager;
+using GraphQLDemo.GprahQL.Platforms;
 
 namespace GraphQLDemo
 {
@@ -38,6 +39,7 @@ namespace GraphQLDemo
             services
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
+                .AddType<PlatformType>()
                 .AddProjections();
         }
 
