@@ -1,0 +1,16 @@
+﻿mutation{
+  addPlatform(input: {
+    name: "RedHat"
+  })
+  {
+    platform{
+      id
+      name
+    }
+  }
+}
+
+curl --request POST \
+  --url http://localhost:5000/graphql/ \
+  --header 'Content-Type: application/json' \
+  --data '{"query":"mutation{\n  addPlatform(input: {\n    name: \"RedHat\"\n  })\n  {\n    platform{\n      id\n      name\n    }\n  }\n}"}'

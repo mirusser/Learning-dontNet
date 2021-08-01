@@ -1,0 +1,19 @@
+﻿query{
+  a: platform{
+    id
+    name
+  }
+  b: platform{
+    id
+    name
+  }
+  c: platform{
+    id
+    name
+  }
+}
+
+curl--request POST \
+  --url http://localhost:5000/graphql/ \
+  --header 'Content-Type: application/json' \
+  --data '{"query":"query{\n  a: platform{\n    id\n    name\n  }\n  b: platform{\n    id\n    name\n  }\n  c: platform{\n    id\n    name\n  }\n}"}'

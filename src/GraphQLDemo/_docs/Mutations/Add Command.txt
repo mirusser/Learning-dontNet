@@ -1,0 +1,23 @@
+﻿mutation{
+  addCommand(input: {
+    howTo: "Perform directory listing"
+    commandLine: "ls"
+    platformId: 4
+  })
+  {
+    command{
+      id
+      howTo
+      commandLine
+      platform{
+        id
+        name
+      }
+    }
+  }
+}
+
+curl --request POST \
+  --url http://localhost:5000/graphql/ \
+  --header 'Content-Type: application/json' \
+  --data '{"query":"mutation{\n  addCommand(input: {\n    howTo: \"Perform directory listing\"\n    commandLine: \"ls\"\n    platformId: 4\n  })\n  {\n    command{\n      id\n      howTo\n      commandLine\n      platform{\n        id\n        name\n      }\n    }\n  }\n}"}'

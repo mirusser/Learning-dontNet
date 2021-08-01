@@ -6,6 +6,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="_docs\Mutations\Add Command.txt" />
+    <None Remove="_docs\Mutations\Add Platform.txt" />
+    <None Remove="_docs\Queries\Filter Query.txt" />
+    <None Remove="_docs\Queries\Get Commands.txt" />
+    <None Remove="_docs\Queries\Get Platforms and Commands.txt" />
+    <None Remove="_docs\Queries\Get Platforms.txt" />
+    <None Remove="_docs\Queries\Paraller Platforms.txt" />
+    <None Remove="_docs\Queries\Sorting Query.txt" />
+    <None Remove="_docs\Subscriptions\Subscribe adding platform.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="_docs\Mutations\Add Command.txt" />
+    <Compile Include="_docs\Mutations\Add Platform.txt" />
+    <Compile Include="_docs\Queries\Filter Query.txt" />
+    <Compile Include="_docs\Queries\Get Commands.txt" />
+    <Compile Include="_docs\Queries\Get Platforms and Commands.txt" />
+    <Compile Include="_docs\Queries\Get Platforms.txt" />
+    <Compile Include="_docs\Queries\Paraller Platforms.txt" />
+    <Compile Include="_docs\Queries\Sorting Query.txt" />
+    <Compile Include="_docs\Subscriptions\Subscribe adding platform.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="5.0.2" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="11.3.2" />
     <PackageReference Include="HotChocolate.Data.EntityFramework" Version="11.3.2" />

@@ -41,6 +41,8 @@ namespace GraphQLDemo
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddMutationType<Mutation>()
+                .AddSubscriptionType<Subscription>()
+                .AddInMemorySubscriptions() // use persistence layer in Production like environment
                 .AddType<PlatformType>()
                 .AddType<CommandType>()
                 .AddFiltering()
@@ -55,6 +57,8 @@ namespace GraphQLDemo
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseWebSockets();
 
             app.UseHttpsRedirection();
 

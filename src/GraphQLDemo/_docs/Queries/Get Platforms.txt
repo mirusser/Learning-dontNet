@@ -1,0 +1,11 @@
+﻿query{
+  platform{
+    id
+    name
+  }
+}
+
+curl --request POST \
+  --url http://localhost:5000/graphql/ \
+  --header 'Content-Type: application/json' \
+  --data '{"query":"query{\n  platform{\n    id\n    name\n  }\n}"}'

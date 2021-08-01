@@ -1,0 +1,16 @@
+﻿query{
+  platform{
+    id
+    name
+    commands{
+      id
+      howTo
+      commandLine
+    }
+  }
+}
+
+curl --request POST \
+  --url http://localhost:5000/graphql/ \
+  --header 'Content-Type: application/json' \
+  --data '{"query":"query{\n  platform{\n    id\n    name\n    commands{\n      id\n      howTo\n      commandLine\n    }\n  }\n}"}'

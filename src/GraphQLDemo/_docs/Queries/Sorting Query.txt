@@ -1,0 +1,11 @@
+﻿query
+{
+    platform(order: { name: DESC}){
+        name
+  }
+}
+
+curl--request POST \
+  --url http://localhost:5000/graphql/ \
+  --header 'Content-Type: application/json' \
+  --data '{"query":"query{\n  platform(order: {name: DESC}){\n    name\n  }\n}"}'

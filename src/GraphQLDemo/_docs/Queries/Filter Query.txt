@@ -1,0 +1,16 @@
+﻿query{
+  command(where: {platformId: {eq: 1} }){
+    id
+    platform{
+      id
+      name
+    }
+    commandLine
+    howTo
+  }
+}
+
+curl --request POST \
+  --url http://localhost:5000/graphql/ \
+  --header 'Content-Type: application/json' \
+  --data '{"query":"query{\n  command(where: {platformId: {eq: 1} }){\n    id\n    platform{\n      id\n      name\n    }\n    commandLine\n    howTo\n  }\n}"}'
