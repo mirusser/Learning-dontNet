@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using BlazorApiClient.DataServices;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,10 @@ namespace BlazorApiClient
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]) });
+            builder.Services.AddHttpClient<ISpaceXDataService, RestSpaceXDataService>
+                (
+                    spdc => spdc.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]) 
+                );
 
             await builder.Build().RunAsync();
         }
