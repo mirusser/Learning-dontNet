@@ -18,6 +18,7 @@ namespace BlazorApiClient.DataServices
         {
             _httpClient = httpClient;
         }
+
         public async Task<LaunchDto[]> GetAllLaunches()
         {
             var launches = 

@@ -21,9 +21,14 @@ namespace BlazorApiClient
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]) });
-            builder.Services.AddHttpClient<ISpaceXDataService, RestSpaceXDataService>
+            //builder.Services.AddHttpClient<ISpaceXDataService, RestSpaceXDataService>
+            //    (
+            //        spdc => spdc.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"])
+            //    );
+
+            builder.Services.AddHttpClient<ISpaceXDataService, GraphQLSPaceXDataService>
                 (
-                    spdc => spdc.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"]) 
+                    spdc => spdc.BaseAddress = new Uri(builder.Configuration["apiBaseUrl"])
                 );
 
             await builder.Build().RunAsync();
