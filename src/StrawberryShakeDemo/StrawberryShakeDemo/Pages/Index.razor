@@ -14,7 +14,34 @@ Welcome to your new app.
     }
 </ul>
 
-@code {
+@code{
+    private string[] titles = Array.Empty<string>();
+    private IDisposable? storeSession;
+
+    protected override void OnInitialized()
+    {
+        storeSession =
+            ConferenceClient
+                .GetSessions
+                .Watch(StrawberryShake.ExecutionStrategy.CacheFirst)
+                .Where(t => !t.Errors.Any())
+                .Select(t => t.Data.Sessions.Nodes.Select(t => t.Title).ToArray())
+                .Subscribe(result =>
+                {
+                    titles = result;
+                    StateHasChanged();
+                });
+    }
+
+    public void Dispose()
+    {
+        storeSession?.Dispose();
+    }
+}
+
+
+@*Simple fetch data example:*@
+@*@code {
     private string[] titles = Array.Empty<string>();
 
     protected override async Task OnInitializedAsync()
@@ -22,4 +49,4 @@ Welcome to your new app.
         var result = await ConferenceClient.GetSessions.ExecuteAsync();
         titles = result.Data.Sessions.Nodes.Select(t => t.Title).ToArray();
     }
-}
+}*@
