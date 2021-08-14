@@ -34,6 +34,15 @@ namespace GrpcClient
                 }
             }
 
+            Console.WriteLine("Second new customer list:");
+            using (var call = customerClient.GetNewCustomers(new NewCustomeRequest()))
+            {
+                await foreach (var currentCustomer in call.ResponseStream.ReadAllAsync())
+                {
+                    Console.WriteLine($"{currentCustomer.FirstName} {currentCustomer.LastName}: {currentCustomer.EmailAddress}");
+                }
+            }
+
             Console.ReadLine();
         }
     }
