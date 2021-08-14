@@ -37,6 +37,10 @@ namespace GrpcServer.Services
                 };
                 await responseStream.WriteAsync(replay);
 
+                //using deadline example:
+                //var user =
+                //    await _databaseContext.GetUserAsync(request.Name, context.CancellationToken);
+
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }
         }

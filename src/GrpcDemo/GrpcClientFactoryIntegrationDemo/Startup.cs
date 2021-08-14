@@ -28,6 +28,7 @@ namespace GrpcClientFactoryIntegrationDemo
             {
                 o.Address = new Uri("https://localhost:5001");
             })
+            //.EnableCallContextPropagation() //can't use is here for some reason, TODO: figure it out why
             .ConfigurePrimaryHttpMessageHandler(() =>
             {
                 var handler = new HttpClientHandler();

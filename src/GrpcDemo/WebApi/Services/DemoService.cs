@@ -9,7 +9,7 @@ using Grpc.Net.ClientFactory;
 using GrpcServer;
 using Microsoft.Extensions.Hosting;
 
-namespace GrpcClientFactoryIntegrationDemo.Services
+namespace WebApi.Services
 {
     public class DemoService : IHostedService, IDemoService
     {
@@ -42,6 +42,10 @@ namespace GrpcClientFactoryIntegrationDemo.Services
             {
                 Console.WriteLine("Say hello timeout");
             }
+            catch (Exception ex)
+            {
+                var foo = ex;
+            }
         }
 
         public async IAsyncEnumerable<HelloReply> SayHellos()
@@ -51,7 +55,7 @@ namespace GrpcClientFactoryIntegrationDemo.Services
                 Name = "Jon"
             };
 
-            using var call = _client.SayHelloStream(request);
+            using var call = _client.SayHelloStream(request, deadline: DateTime.UtcNow.AddSeconds(15));
 
             await foreach (var helloReply in call.ResponseStream.ReadAllAsync())
             {
@@ -63,7 +67,7 @@ namespace GrpcClientFactoryIntegrationDemo.Services
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             await SayHello();
-            await foreach (var helloReply in SayHellos());
+            await foreach (var helloReply in SayHellos()) ;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
