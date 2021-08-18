@@ -443,3 +443,4 @@ $RECYCLE.BIN/
 /src/FileDemo/Files
 /src/EmailDemo/appsettings.Development.json
 /src/FluenValidationDemo/FluentValidation.WebApi/appsettings.Development.json
+/src/MediatRResponseCachingDemo/API/appsettings.Development.json
