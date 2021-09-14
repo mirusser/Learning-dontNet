@@ -22,6 +22,7 @@ namespace PlatformService.Data
             if (platform is null) throw new ArgumentNullException(nameof(platform));
 
             _context.Add(platform);
+            SaveChanges();
         }
 
         public IEnumerable<Platform> GetAtllPlatforms()
