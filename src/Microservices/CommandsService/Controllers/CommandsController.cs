@@ -32,7 +32,7 @@ namespace CommandsService.Controllers
             if (!_repo.PlatformExists(platformId)) return NotFound();
 
             var commands = _repo.GetCommandsForPlatform(platformId);
-            var commandsReadDto = _mapper.Map<CommandReadDto>(commands);
+            var commandsReadDto = _mapper.Map<IEnumerable<CommandReadDto>>(commands);
 
             return Ok(commandsReadDto);
         }
@@ -67,7 +67,7 @@ namespace CommandsService.Controllers
 
             return CreatedAtRoute(
                 nameof(GetCommandForPlatform),
-                new { platformId, commandId = command.Id });
+                new { platformId, commandId = command.Id }, commandReadDto);
         }
     }
 }
