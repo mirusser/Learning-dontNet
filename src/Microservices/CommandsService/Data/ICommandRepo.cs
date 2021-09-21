@@ -11,12 +11,16 @@ namespace CommandsService.Data
     {
         bool SaveChanges();
 
+        //platforms
         IEnumerable<Platform> GetAllPlatforms();
 
         void CreatePlatform(Platform platform);
 
         bool PlatformExists(int platformId);
 
+        bool ExternalPlatformExists(int externalPlatformId);
+
+        //commands
         IEnumerable<Command> GetCommandsForPlatform(int platformId);
 
         Command? GetCommand(int platformId, int commandId);
