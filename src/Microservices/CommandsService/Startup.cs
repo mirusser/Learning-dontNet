@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommandsService.AsyncDataServices;
 using CommandsService.Data;
 using CommandsService.EventProcessing;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,7 @@ namespace CommandsService
             services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMem"));
             services.AddTransient<ICommandRepo, CommandRepo>();
             services.AddSingleton<IEventProcessor, EventProcessor>();
+            services.AddHostedService<MessageBusSubscriber>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
