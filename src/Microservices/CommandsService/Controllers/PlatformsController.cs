@@ -30,7 +30,7 @@ namespace CommandsService.Controllers
             var platforms = _repo.GetAllPlatforms();
             if (!platforms.Any()) return NotFound();
 
-            var platformsReadDto = _mapper.Map<PlatformReadDto>(platforms);
+            var platformsReadDto = _mapper.Map<List<PlatformReadDto>>(platforms);
             return Ok(platformsReadDto);
         }
 

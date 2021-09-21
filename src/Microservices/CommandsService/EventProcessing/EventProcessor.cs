@@ -80,6 +80,7 @@ namespace CommandsService.EventProcessing
                 }
 
                 repo.CreatePlatform(platform);
+                Console.WriteLine("--> Platform added");
             }
             catch (Exception ex)
             {

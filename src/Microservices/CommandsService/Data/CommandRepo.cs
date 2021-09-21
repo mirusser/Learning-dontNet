@@ -29,8 +29,6 @@ namespace CommandsService.Data
         {
             if (platform is null) throw new ArgumentNullException(nameof(platform));
 
-            if (platform.Id != default) throw new ArgumentException($"{nameof(platform)} can't have an Id");
-
             _context.Platforms.Add(platform);
             SaveChanges();
         }
