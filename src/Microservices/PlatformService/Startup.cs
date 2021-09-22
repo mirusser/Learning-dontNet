@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PlatformService.AsyncDataServices;
 using PlatformService.Data;
+using PlatformService.SyncDataServices.Grpc;
 using PlatformService.SyncDataServices.Http;
 
 namespace PlatformService
@@ -43,6 +44,7 @@ namespace PlatformService
                 services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMemDb"));
             }
 
+            services.AddGrpc();
             services.AddScoped<IPlatformRepo, PlatformRepo>();
 
             services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
@@ -76,6 +78,7 @@ namespace PlatformService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<GrpcPlatformService>();
             });
 
             PrepDb.PrepPopulation(app, _env.IsProduction());
