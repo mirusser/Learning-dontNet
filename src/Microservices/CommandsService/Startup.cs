@@ -60,6 +60,8 @@ namespace CommandsService
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            PrepDb.PrepPopulation(app);
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using AutoMapper;
 using CommandsService.Data;
 using CommandsService.DTOs;
@@ -51,6 +47,12 @@ namespace CommandsService.EventProcessing
             Console.WriteLine("--> Determining Event");
 
             var eventType = JsonSerializer.Deserialize<GenericEventDto>(notificationMesage);
+
+            if (eventType is null)
+            {
+                Console.WriteLine("--> Could not determine event type");
+                return EventType.Undetermined;
+            }
 
             switch (eventType.Event)
             {

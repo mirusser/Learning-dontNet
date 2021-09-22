@@ -20,7 +20,7 @@ namespace CommandsService.SyncDataServices.Grpc
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Platform>> GetAllPlatforms()
+        public IEnumerable<Platform> GetAllPlatforms()
         {
             Console.WriteLine($"--> Calling Grpc Service: {_configuration["GrpcPlatform"]}");
 
@@ -31,7 +31,7 @@ namespace CommandsService.SyncDataServices.Grpc
 
             try
             {
-                var response = await client.GetAllPlaformsAsync(request);
+                var response = client.GetAllPlaforms(request);
                 platforms = _mapper.Map<List<Platform>>(response.Platforms);
             }
             catch (Exception ex)

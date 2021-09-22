@@ -6,6 +6,6 @@ namespace CommandsService.SyncDataServices.Grpc
 {
     public interface IPlatformDataClient
     {
-        Task<IEnumerable<Platform>> GetAllPlatforms();
+        IEnumerable<Platform> GetAllPlatforms();
     }
 }
