@@ -19,7 +19,7 @@ public class MessageConsumer : IConsumer<Message>
 
     public Task Consume(ConsumeContext<Message> context)
     {
-        _logger.LogInformation($"Received Text: {context.Message.Text}");
+        _logger.LogInformation("Received Text: {message}", context.Message.Text);
 
         return Task.CompletedTask;
     }

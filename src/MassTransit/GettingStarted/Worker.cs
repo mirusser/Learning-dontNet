@@ -17,7 +17,7 @@ public class Worker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation($"Worker: Sending message...");
+            _logger.LogInformation("Worker: Starting sending a message...");
 
             await _bus.Publish(new Message { Text = $"The time is {DateTimeOffset.Now}" }, stoppingToken);
 
