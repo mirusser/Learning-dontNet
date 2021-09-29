@@ -1,0 +1,49 @@
+﻿version: "3.5"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmqsaga
+    restart: unless-stopped
+    ports:
+      - 5672:5672
+      - 15672:15672
+#    network_mode: host
+    networks:
+      - sagapatternnetwork
+    # volumes: 
+    #   - rabbitmq:/var/lib/rabbitmq
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    container_name: sqlserversaga
+    ports:
+      - "1434:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=P@ssword!@#
+    volumes:
+      - sqlserver:/var/opt/mssql 
+    networks:
+      - sagapatternnetwork
+    
+  orderservice:
+    image: orderservice
+    container_name: orderservice
+    hostname: orderservice
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+    ports:
+      - 8086:80
+    networks:
+      - sagapatternnetwork 
+
+networks:
+  sagapatternnetwork:
+    name: saga-choreography-pattern-network
+
+volumes:
+  sqlserver:
+      driver: local

@@ -445,3 +445,4 @@ $RECYCLE.BIN/
 /src/FluenValidationDemo/FluentValidation.WebApi/appsettings.Development.json
 /src/MediatRResponseCachingDemo/API/appsettings.Development.json
 /src/ModularMonolithDemo/API/appsettings.Development.json
+/src/SagaChoreographyPattern/OrderService/deploy
