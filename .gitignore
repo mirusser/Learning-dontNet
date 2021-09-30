@@ -446,3 +446,4 @@ $RECYCLE.BIN/
 /src/MediatRResponseCachingDemo/API/appsettings.Development.json
 /src/ModularMonolithDemo/API/appsettings.Development.json
 /src/SagaChoreographyPattern/OrderService/deploy
+/src/SagaChoreographyPattern/EcommService/deploy

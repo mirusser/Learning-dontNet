@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Shared.DbModels;
 
-namespace OrderService.Providers
+namespace EcommService.Providers
 {
     public interface IOrderDetailsProvider
     {

@@ -36,7 +36,7 @@ namespace OrderService.Controllers
         [HttpGet]
         public async Task<IEnumerable<OrderDetail>> Get()
         {
-            return await _orderDetailsProvider.GetAll();
+            return await _orderDetailsProvider.GetAllAsync();
         }
 
         [HttpGet("{id}")]
@@ -57,7 +57,7 @@ namespace OrderService.Controllers
                 Quantity = orderDetail.Quantity
             };
 
-            _logger.LogInformation("Started sending/publishing a message...");
+            _logger.LogInformation("Sending/publishing a message: {OrderCreated}", orderCreated);
 
             await _publishEndpoint.Publish<OrderCreated>(orderCreated);
         }

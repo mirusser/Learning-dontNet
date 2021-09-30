@@ -40,6 +40,18 @@ services:
     networks:
       - sagapatternnetwork 
 
+  ecommservice:
+    image: ecommservice
+    container_name: ecommservice
+    hostname: ecommservice
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+    ports:
+      - 8087:80
+    networks:
+      - sagapatternnetwork 
+
 networks:
   sagapatternnetwork:
     name: saga-choreography-pattern-network

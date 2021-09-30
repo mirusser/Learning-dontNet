@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using EcommService.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using OrderService.Settings;
 using Shared.DbModels;
 
-namespace OrderService.Providers
+namespace EcommService.Providers
 {
     public class OrderDetailsProvider : IOrderDetailsProvider
     {
