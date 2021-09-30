@@ -25,7 +25,7 @@ namespace EcommService.Listeners
 
         public async Task Consume(ConsumeContext<OrderCreated> context)
         {
-            _logger.LogInformation("Got inventory response");
+            _logger.LogInformation("Got order created");
 
             var numberOfRowsAffected =
                 await _inventoryUpdatorProvider.UpdateAsync(context.Message.ProductId, context.Message.Quantity);

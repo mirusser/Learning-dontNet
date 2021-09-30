@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GreenPipes;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -47,7 +48,8 @@ namespace OrderService
 
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host("rabbitmq://rabbitmqsaga");
+                    //cfg.Host("rabbitmq://rabbitmqsaga"); //TODO add to settings
+                    cfg.Host("rabbitmq://localhost");
                     cfg.ConfigureEndpoints(ctx);
                 });
             });

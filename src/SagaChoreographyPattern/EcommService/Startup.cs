@@ -47,7 +47,8 @@ namespace EcommService
 
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host("rabbitmq://rabbitmqsaga");
+                    //cfg.Host("rabbitmq://rabbitmqsaga"); //TODO add to settings
+                    cfg.Host("rabbitmq://localhost");
                     cfg.ConfigureEndpoints(ctx);
                 });
             });
