@@ -14,6 +14,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OrderService.Listeners;
 using OrderService.Providers;
 using OrderService.Settings;
 
@@ -41,9 +42,13 @@ namespace OrderService
 
             services.AddMassTransit(config =>
             {
+                config.AddConsumer<InventoryResponseListener>();
+                config.SetKebabCaseEndpointNameFormatter();
+
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host("rabbitmq://rabbitmqsaga");
+                    cfg.ConfigureEndpoints(ctx);
                 });
             });
             services.AddMassTransitHostedService(waitUntilStarted: true);

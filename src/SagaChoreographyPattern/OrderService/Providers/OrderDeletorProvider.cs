@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+﻿using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Options;
-using OrderService.Models;
 using OrderService.Settings;
 
 namespace OrderService.Providers
@@ -20,7 +15,7 @@ namespace OrderService.Providers
             _connectionStrings = connectionStrings.Value;
         }
 
-        public async Task Delete(int orderId)
+        public async Task DeleteAsync(int orderId)
         {
             using var connection = new SqlConnection(_connectionStrings.DefaultConnection);
 

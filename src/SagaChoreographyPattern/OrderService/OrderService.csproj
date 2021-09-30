@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="deploy\**" />
+    <Content Remove="deploy\**" />
+    <EmbeddedResource Remove="deploy\**" />
+    <None Remove="deploy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="MassTransit" Version="7.2.2" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.2.2" />

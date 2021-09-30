@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using OrderService.Models;
+using Shared.DbModels;
 
 namespace OrderService.Providers
 {

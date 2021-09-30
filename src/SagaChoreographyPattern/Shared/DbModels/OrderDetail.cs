@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderService.Models
+namespace Shared.DbModels
 {
     public class OrderDetail
     {

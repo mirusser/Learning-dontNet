@@ -4,9 +4,9 @@ using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using OrderService.Models;
 using OrderService.Providers;
-using Shared.Models;
+using Shared.DbModels;
+using Shared.EventModels;
 
 namespace OrderService.Controllers
 {

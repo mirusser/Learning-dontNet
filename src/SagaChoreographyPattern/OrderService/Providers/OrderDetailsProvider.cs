@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Options;
-using OrderService.Models;
 using OrderService.Settings;
+using Shared.DbModels;
 
 namespace OrderService.Providers
 {
