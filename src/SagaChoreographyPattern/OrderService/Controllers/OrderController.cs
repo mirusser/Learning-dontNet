@@ -48,7 +48,7 @@ namespace OrderService.Controllers
         [HttpPost]
         public async Task Post([FromBody] OrderDetail orderDetail)
         {
-            var id = await _orderCreatorProvider.Create(orderDetail);
+            var id = await _orderCreatorProvider.CreateAsync(orderDetail);
 
             var orderCreated = new OrderCreated
             {

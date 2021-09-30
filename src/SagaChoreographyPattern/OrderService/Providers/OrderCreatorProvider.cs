@@ -22,7 +22,7 @@ namespace OrderService.Providers
             _logger = logger;
         }
 
-        public async Task<int> Create(OrderDetail orderDetail)
+        public async Task<int> CreateAsync(OrderDetail orderDetail)
         {
             using var connection = new SqlConnection(_connectionStrings.DefaultConnection);
 

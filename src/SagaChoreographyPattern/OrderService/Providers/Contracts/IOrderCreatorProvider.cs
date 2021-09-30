@@ -5,6 +5,6 @@ namespace OrderService.Providers
 {
     public interface IOrderCreatorProvider
     {
-        Task<int> Create(OrderDetail orderDetail);
+        Task<int> CreateAsync(OrderDetail orderDetail);
     }
 }
