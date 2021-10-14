@@ -1,4 +1,5 @@
 ﻿using System;
+using DelegateAndEventsDemo.RealisticExample;
 
 namespace DelegateAndEventsDemo
 {
@@ -15,12 +16,16 @@ namespace DelegateAndEventsDemo
     //The delegate associated with an event ususally have to parameters as a standard practice (its no mandatory, it can have more parameters)
     //- the first one is an object representing the instance that raised the event
     //- the second one is a type representing event arguments
+
+    //Event essentialy is a mechanism for communication between objects
+    //is used in building loosely coupled applications and helps extending applications
     internal static class Program
     {
         private static void Main(string[] args)
         {
-            RunDelegateExamples();
-            RunEventExamples();
+            //RunDelegateExamples();
+            //RunEventExamples();
+            RunMoreRealisticExampleOfEvent();
         }
 
         private static int Square(int input) => input * input;
@@ -67,6 +72,19 @@ namespace DelegateAndEventsDemo
         private static void Calculator_Calculate(object arg1, CalculatorEventArgs arg2)
         {
             Console.WriteLine($"First event: {arg2.Name}");
+        }
+
+        private static void RunMoreRealisticExampleOfEvent()
+        {
+            var videoEncoder = new VideoEncoder(); //publisher
+            var mailService = new MailService(); //subscrber
+            var messageService = new MessageService(); //another subscriber
+
+            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
+            videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
+
+            var video = new Video { Title = "Test video title" };
+            videoEncoder.Encode(video);
         }
     }
 }
