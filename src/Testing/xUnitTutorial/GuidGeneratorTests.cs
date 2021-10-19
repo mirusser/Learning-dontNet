@@ -12,7 +12,7 @@ namespace xUnitTutorial
     }
 
     [Collection(name: "Guid generator")]
-    public class GuidGeneratorTestsOne
+    public class GuidGeneratorTestsOne : IDisposable
     {
         private readonly GuidGenerator _guidGenerator;
         private readonly ITestOutputHelper _output;
