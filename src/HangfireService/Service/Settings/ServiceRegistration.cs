@@ -2,6 +2,7 @@
 using Hangfire.Mongo;
 using Hangfire.Mongo.Migration.Strategies;
 using Hangfire.Mongo.Migration.Strategies.Backup;
+using Jobs;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,12 +42,9 @@ namespace HangfireService.Settings
                 RabbitMQSettings rabbitMQSettings = new();
                 configuration.GetSection(nameof(RabbitMQSettings)).Bind(rabbitMQSettings);
 
-                config.SetKebabCaseEndpointNameFormatter();
-
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host(rabbitMQSettings.Host);
-                    cfg.ConfigureEndpoints(ctx);
                 });
             });
             services.AddMassTransitHostedService(waitUntilStarted: true);

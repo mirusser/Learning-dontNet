@@ -23,7 +23,7 @@ namespace HangfireService.Features.Commands
 
         public Task<Unit> Handle(RunJobCommand request, CancellationToken cancellationToken)
         {
-            Task.FromResult(_publishEndpoint.Publish<IJobMessage>(new { JobName = request.JobName, ServiceName = request.JobName }));
+            Task.FromResult(_publishEndpoint.Publish<IJobMessage>(new { JobName = request.JobName, ServiceName = request.JobName }, cancellationToken));
 
             return Task.FromResult(new Unit());
         }
