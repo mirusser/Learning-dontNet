@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTesting", "IntegrationTesting.csproj", "{0B50DD4A-BD5A-46E8-8F42-16F4FE62BC8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B50DD4A-BD5A-46E8-8F42-16F4FE62BC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B50DD4A-BD5A-46E8-8F42-16F4FE62BC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B50DD4A-BD5A-46E8-8F42-16F4FE62BC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B50DD4A-BD5A-46E8-8F42-16F4FE62BC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AAAC85A-809F-4930-9435-A31DA6CC14BD}
+	EndGlobalSection
+EndGlobal
