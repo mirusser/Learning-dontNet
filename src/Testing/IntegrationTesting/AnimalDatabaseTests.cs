@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using IntegrationTesting.Components.Database;
 using Npgsql;
@@ -9,34 +6,43 @@ using Xunit;
 
 namespace IntegrationTesting
 {
-    public class AnimalDatabaseTests
+    public class AnimalDatabaseTests : IClassFixture<AnimalSetupFixture>
     {
-        public const string _connBase = "Server=127.0.0.1;Port=5432;Database=postgres;User Id=username;Password=password;";
-        public const string _db = "test_db";
-        public static readonly string _conn = _connBase.Replace("postgres", _db);
+        private readonly AnimalSetupFixture _animalSetupFixture;
+
+        public AnimalDatabaseTests(AnimalSetupFixture animalSetupFixture)
+        {
+            _animalSetupFixture = animalSetupFixture;
+        }
 
         [Fact]
         public async Task Should_AnimalStore_SavesAnimalToDatabase()
         {
-            await DatabaseSetup.CreateDatabase(_connBase, _db);
+            //arrange
+            var name = Guid.NewGuid().ToString();
+            await _animalSetupFixture.Store.SaveAnimal(new(0, name, "Bar"));
 
-            var connectionFactory = new PostgresqlConnectionFactory(_conn);
-            NpgsqlConnection connection = await connectionFactory.Create();
-            IDatabase database = new Postgresql(connection);
-            IAnimalStore store = new AnimalStore(database);
+            //act
+            var animals = await _animalSetupFixture.Store.GetAnimals();
 
-            await store.SaveAnimal(new (0, "Foo", "Bar"));
+            //assert
+            Assert.Single(animals, x => x.Name.Equals(name));
+        }
 
-            var animals = await store.GetAnimals();
+        [Fact]
+        public async Task Should_AnimalStore_GetsSavedAnimalByIdFromDatabase()
+        {
+            //arrange
+            //AnimalSetupFixture is seeding the databse
 
-            await connectionFactory.DisposeAsync();
-            await DatabaseSetup.DeleteDatabase(_connBase, _db);
+            //act
+            var animal = await _animalSetupFixture.Store.GetAnimal(1);
 
-            var animal = Assert.Single(animals);
+            //assert
+            Assert.NotNull(animal);
             Assert.Equal(1, animal.Id);
             Assert.Equal("Foo", animal.Name);
             Assert.Equal("Bar", animal.Type);
-
         }
     }
 }
