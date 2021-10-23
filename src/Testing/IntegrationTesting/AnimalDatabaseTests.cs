@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using IntegrationTesting.Components.Database;
-using Npgsql;
 using Xunit;
 
 namespace IntegrationTesting
 {
-    public class AnimalDatabaseTests : IClassFixture<AnimalSetupFixture>
+    [Collection(nameof(AnimalCollection))]
+    public class AnimalDatabaseTests //: IClassFixture<AnimalSetupFixture> //for future references
     {
         private readonly AnimalSetupFixture _animalSetupFixture;
 
