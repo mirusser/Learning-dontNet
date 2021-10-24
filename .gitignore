@@ -447,3 +447,4 @@ $RECYCLE.BIN/
 /src/ModularMonolithDemo/API/appsettings.Development.json
 /src/SagaChoreographyPattern/OrderService/deploy
 /src/SagaChoreographyPattern/EcommService/deploy
+/src/Testing/SampleApp/wwwroot/files/base.png
