@@ -1,8 +1,10 @@
+using System;
 using System.Reflection;
 using Hangfire;
 using Hangfire.Mongo;
 using Hangfire.Mongo.Migration.Strategies;
 using Hangfire.Mongo.Migration.Strategies.Backup;
+using HangfireService.Clients;
 using HangfireService.Features.Commands;
 using HangfireService.Settings;
 using MassTransit;
@@ -13,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Polly;
 
 namespace HangfireService
 {
@@ -36,6 +39,10 @@ namespace HangfireService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HangfireService", Version = "v1" });
             });
+
+            services.AddHttpClient<ICallEndpointClient>()
+                .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(10, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))))
+                .AddTransientHttpErrorPolicy(builder => builder.CircuitBreakerAsync(3, TimeSpan.FromSeconds(10)));
 
             services.AddHangfireServices(Configuration);
         }
