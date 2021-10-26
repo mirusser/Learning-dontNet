@@ -40,7 +40,7 @@ namespace HangfireService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HangfireService", Version = "v1" });
             });
 
-            services.AddHttpClient<ICallEndpointClient>()
+            services.AddHttpClient<ICallEndpointClient, CallEndpointClient>()
                 .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(10, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))))
                 .AddTransientHttpErrorPolicy(builder => builder.CircuitBreakerAsync(3, TimeSpan.FromSeconds(10)));
 

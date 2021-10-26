@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using HangfireService.Features.Commands;
+using HangfireService.Features.Queries;
 using HangfireService.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +23,8 @@ namespace HangfireService.Controllers
         public async Task<IActionResult> RegisterJob(RegisterJobCommand request)
             => Ok(await _mediator.Send(request));
 
-        [HttpGet]
-        public Array GetAllJobTypes()
-        {
-            return Enum.GetValues(typeof(JobType));
-        }
+        [HttpPost]
+        public async Task<IActionResult> GetAllJobTypes(GetAllJobTypeQuery request)
+            => Ok(await _mediator.Send(request));
     }
 }
