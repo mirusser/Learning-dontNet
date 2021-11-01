@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace CachingStrategies.Strategies
 {
+    //also called key prefix cache
+    //use case: cache.ToNamespaced("products");
     public class NamespacedCache : IDistributedCache
     {
         private readonly IDistributedCache _cache;
@@ -18,7 +17,6 @@ namespace CachingStrategies.Strategies
             _cache = cache;
             _name = name;
         }
-
 
         public byte[] Get(string key) => _cache.Get(_name + key);
 
