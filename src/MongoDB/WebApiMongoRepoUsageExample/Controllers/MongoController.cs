@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using DocumentsExampleLib.Documents;
 using Microsoft.AspNetCore.Mvc;
 using MongoDbRepository.Repository;
@@ -17,21 +18,23 @@ namespace WebApiMongoRepoUsageExample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] IconDocument document)
+        public async Task<IActionResult> Create([FromBody] IconDocument document, CancellationToken canellationToken = default)
         {
-            return Ok(await _mongoRepository.CreateOneAsync(document));
+            await _mongoRepository.CreateOneAsync(document);
+
+            return Ok(document);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetById([FromQuery] string id)
+        public async Task<IActionResult> GetById([FromQuery] string id, CancellationToken cancellation = default)
         {
-            return Ok(await _mongoRepository.FindOneAsync(x => x.Id == id));
+            return Ok(await _mongoRepository.FindOneAsync(x => x.Id == id, cancellation));
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(CancellationToken cancellation = default)
         {
-            return Ok(await _mongoRepository.GetAllAsync());
+            return Ok(await _mongoRepository.GetAllAsync(cancellation));
         }
     }
 }
