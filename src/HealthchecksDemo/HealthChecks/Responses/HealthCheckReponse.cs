@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace HealthchecksDemo.Models
+namespace HealthchecksDemo.HealthChecks.Responses
 {
     public class HealthCheckReponse
     {
