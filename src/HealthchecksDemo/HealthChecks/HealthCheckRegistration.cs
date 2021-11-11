@@ -37,7 +37,7 @@ namespace CarDealership.HealthChecks
                 opt.MaximumHistoryEntriesPerEndpoint(healthChecksSettings.UIConfiguration.MaxNumberOfEntriesPerEndpoint);
                 opt.SetApiMaxActiveRequests(healthChecksSettings.UIConfiguration.ApiRequestsConcurrency);
 
-                opt.AddHealthCheckEndpoint("All health checks", "/health-ui"); //map health check api
+                opt.AddHealthCheckEndpoint("All health checks", "/health-ui");
             })
             .AddInMemoryStorage();
         }

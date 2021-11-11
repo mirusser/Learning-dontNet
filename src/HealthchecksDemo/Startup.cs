@@ -72,15 +72,15 @@ namespace HealthchecksDemo
             app.UseAuthorization();
 
             #region Healthchecks
-
-            app.UseCustomHealthCheckReady();
-            app.UseCustomFullHealthCheck();
-            app.UseServiceHealthCheckUI();
+            app.UseServiceHealthChecks();
 
             #endregion Healthchecks
 
             app.UseEndpoints(endpoints =>
             {
+                //map healthcheck ui endpoint- default is /healthchecks-ui
+                endpoints.MapHealthChecksUI(options => options.UIPath = "/hc-ui");
+
                 endpoints.MapControllers();
             });
         }

@@ -14,51 +14,47 @@ namespace HealthchecksDemo.HealthChecks.Middlewares
 {
     public static class CustomMiddlewareExtensions
     {
-        public static IApplicationBuilder UseCustomHealthCheckReady(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseServiceHealthChecks(this IApplicationBuilder builder)
         {
-            return builder.UseHealthChecks("/health/ready", new HealthCheckOptions
+            builder.UseHealthChecks("/health/ready", new HealthCheckOptions
             {
                 Predicate = (check) => check.Tags.Contains(nameof(HealthChecksTags.Ready)),
                 ResponseWriter = _responseWriter
             });
-        }
 
-        public static IApplicationBuilder UseCustomFullHealthCheck(this IApplicationBuilder builder)
-        {
-            return builder.UseHealthChecks("/health", new HealthCheckOptions
+            builder.UseHealthChecks("/health", new HealthCheckOptions
             {
                 ResponseWriter = _responseWriter
             });
-        }
 
-        public static IApplicationBuilder UseServiceHealthCheckUI(this IApplicationBuilder builder)
-        {
-            return builder.UseHealthChecks("/health-ui", new HealthCheckOptions
+            builder.UseHealthChecks("/health-ui", new HealthCheckOptions
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
+
+            return builder;
         }
 
         #region Response writer Func
 
         private static readonly Func<HttpContext, HealthReport, Task> _responseWriter = async (context, report) =>
-           {
-               context.Response.ContentType = "application/json";
-               var response = new HealthCheckReponse
-               {
-                   Status = report.Status.ToString(),
-                   HealthCheckDuration = report.TotalDuration,
-                   HealthChecks = report.Entries.Select(x => new IndividualHealthCheckResponse
-                   {
-                       Component = x.Key,
-                       Status = x.Value.Status.ToString(),
-                       Description = x.Value.Description,
-                       Exception = x.Value.Exception
-                   })
-               };
-               await context.Response.WriteAsync(JsonSerializer.Serialize(response)).ConfigureAwait(false);
-           };
+              {
+                  context.Response.ContentType = "application/json";
+                  var response = new HealthCheckReponse
+                  {
+                      Status = report.Status.ToString(),
+                      HealthCheckDuration = report.TotalDuration,
+                      HealthChecks = report.Entries.Select(x => new IndividualHealthCheckResponse
+                      {
+                          Component = x.Key,
+                          Status = x.Value.Status.ToString(),
+                          Description = x.Value.Description,
+                          Exception = x.Value.Exception
+                      })
+                  };
+                  await context.Response.WriteAsync(JsonSerializer.Serialize(response)).ConfigureAwait(false);
+              };
 
         #endregion Response writer Func
     }
