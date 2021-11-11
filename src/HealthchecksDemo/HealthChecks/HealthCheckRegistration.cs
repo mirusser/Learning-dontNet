@@ -1,7 +1,9 @@
 ﻿using System;
 using CarDealership.HealthChecks.Tags;
+using HealthchecksDemo.HealthChecks;
 using HealthchecksDemo.HealthChecks.Custom;
 using HealthchecksDemo.Models.DataModels.Context;
+using HealthchecksDemo.Services;
 using HealthchecksDemo.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,9 @@ namespace CarDealership.HealthChecks
     {
         public static void AddServiceHealthChecks(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHostedService<ExampleStartupHostedService>();
+            services.AddSingleton<StartupHostedServiceHealthCheck>();
+
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>(
                     name: "Database health check",
@@ -26,7 +31,11 @@ namespace CarDealership.HealthChecks
                 .AddMemoryHealthCheck(
                     name: "Memory health check",
                     failureStatus: HealthStatus.Degraded,
-                    tags: new[] { nameof(HealthChecksTags.Memory) });
+                    tags: new[] { nameof(HealthChecksTags.Memory) })
+                .AddCheck<StartupHostedServiceHealthCheck>(
+                    name: "Hosted service startup",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { nameof(HealthChecksTags.Ready) });
 
             services.AddHealthChecksUI(opt =>
             {
