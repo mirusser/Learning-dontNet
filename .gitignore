@@ -449,3 +449,4 @@ $RECYCLE.BIN/
 /src/SagaChoreographyPattern/EcommService/deploy
 /src/Testing/SampleApp/wwwroot/files/base.png
 /src/HybridMultitenancyDemo/Api/appsettings.Development.json
+/src/MinimalAPI-Les/appsettings.Development.json
