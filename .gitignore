@@ -451,3 +451,4 @@ $RECYCLE.BIN/
 /src/HybridMultitenancyDemo/Api/appsettings.Development.json
 /src/MinimalAPI-Les/appsettings.Development.json
 /src/AuthJWTDemo/appsettings.Development.json
+/src/RedisPrimaryDbApiDemo/RedisApi/appsettings.Development.json
