@@ -51,7 +51,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flyweight", "Flyweight", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flyweight", "Structural\Flyweight\Flyweight\Flyweight.csproj", "{E1408305-22FB-4B0F-8EA8-9D75B03344A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Structural\Proxy\Proxy\Proxy.csproj", "{C7974D95-CD42-4F8F-A18C-5F13C35F580B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxy", "Structural\Proxy\Proxy\Proxy.csproj", "{C7974D95-CD42-4F8F-A18C-5F13C35F580B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Behavioral", "Behavioral", "{1F315AB6-306F-4472-856B-C08407CC17F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChainOfResponsibility", "ChainOfResponsibility", "{EB9FDD13-4C3D-4F4F-BDB5-4E0249E99F84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainOfResponsibility", "Behavioral\ChainOfResponsibility\ChainOfResponsibility\ChainOfResponsibility.csproj", "{0E55E379-9B58-434D-A7C9-B96B5DA0FF7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +113,10 @@ Global
 		{C7974D95-CD42-4F8F-A18C-5F13C35F580B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7974D95-CD42-4F8F-A18C-5F13C35F580B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7974D95-CD42-4F8F-A18C-5F13C35F580B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E55E379-9B58-434D-A7C9-B96B5DA0FF7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E55E379-9B58-434D-A7C9-B96B5DA0FF7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E55E379-9B58-434D-A7C9-B96B5DA0FF7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E55E379-9B58-434D-A7C9-B96B5DA0FF7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +145,8 @@ Global
 		{BC11709E-2B43-4897-844A-C99BCDF2894D} = {825390BF-76A4-42AD-985E-D4AFA83994CE}
 		{E1408305-22FB-4B0F-8EA8-9D75B03344A8} = {BC11709E-2B43-4897-844A-C99BCDF2894D}
 		{C7974D95-CD42-4F8F-A18C-5F13C35F580B} = {825390BF-76A4-42AD-985E-D4AFA83994CE}
+		{EB9FDD13-4C3D-4F4F-BDB5-4E0249E99F84} = {1F315AB6-306F-4472-856B-C08407CC17F4}
+		{0E55E379-9B58-434D-A7C9-B96B5DA0FF7E} = {EB9FDD13-4C3D-4F4F-BDB5-4E0249E99F84}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB8E9EBD-D105-474C-8A89-3D48BC48BBA2}

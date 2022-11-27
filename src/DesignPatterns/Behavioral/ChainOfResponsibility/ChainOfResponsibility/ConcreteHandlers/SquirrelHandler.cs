@@ -1,0 +1,16 @@
+﻿namespace ChainOfResponsibility.ConcreteHandlers;
+
+internal class SquirrelHandler : AbstractHandler
+{
+    public override object Handle(object request)
+    {
+        if (request.ToString() == "Nut")
+        {
+            return $"Squirrel: I'll eat the {request}.{Environment.NewLine}";
+        }
+        else
+        {
+            return base.Handle(request);
+        }
+    }
+}
