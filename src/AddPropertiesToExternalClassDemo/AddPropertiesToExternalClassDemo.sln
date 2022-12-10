@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33103.201
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddPropertiesToExternalClassDemo", "AddPropertiesToExternalClassDemo\AddPropertiesToExternalClassDemo.csproj", "{21DA20FC-5A63-468E-9C96-9A47F5D6A746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalLib", "ExternalLib\ExternalLib.csproj", "{210D1EC6-3442-4CED-B43D-1B47764C47BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21DA20FC-5A63-468E-9C96-9A47F5D6A746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DA20FC-5A63-468E-9C96-9A47F5D6A746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DA20FC-5A63-468E-9C96-9A47F5D6A746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DA20FC-5A63-468E-9C96-9A47F5D6A746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210D1EC6-3442-4CED-B43D-1B47764C47BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210D1EC6-3442-4CED-B43D-1B47764C47BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210D1EC6-3442-4CED-B43D-1B47764C47BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210D1EC6-3442-4CED-B43D-1B47764C47BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D5D3041-E15D-49C8-9427-6141249CEF05}
+	EndGlobalSection
+EndGlobal
