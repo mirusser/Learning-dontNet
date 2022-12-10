@@ -7,12 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="_docs\Definition.md" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="_docs\Definition.md" />
-  </ItemGroup>
-
 </Project>

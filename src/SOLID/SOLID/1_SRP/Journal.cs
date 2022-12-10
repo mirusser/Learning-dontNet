@@ -7,7 +7,7 @@ namespace SOLID._1_SRP;
 
 #region e1 v1
 
-public class Journal_V1
+public class JournalV1
 {
     private readonly List<string> entries = new();
 
@@ -23,11 +23,11 @@ public class Journal_V1
     }
 }
 
-public class JurnalClient_V1 : IClient
+public class JurnalClientV1 : IClient
 {
     public void DoSomething()
     {
-        Journal_V1 journal = new();
+        JournalV1 journal = new();
         journal.AddEntry("I cried a bit.");
         journal.AddEntry("I ate a wobbly worm.");
     }
@@ -37,7 +37,7 @@ public class JurnalClient_V1 : IClient
 
 #region e1 v2
 
-public class Journal_V2
+public class JournalV2
 {
     private readonly List<string> entries = new();
 
@@ -62,11 +62,11 @@ public class Journal_V2
     }
 }
 
-public class JurnalClient_V2 : IClient
+public class JurnalClientV2 : IClient
 {
     public void DoSomething()
     {
-        Journal_V2 journal = new();
+        JournalV2 journal = new();
         journal.AddEntry("I cried a bit.");
         journal.AddEntry("I ate a wobbly worm.");
 
@@ -81,7 +81,7 @@ public class JurnalClient_V2 : IClient
 
 #region e1 v3
 
-public class Journal_V3
+public class JournalV3
 {
     private readonly List<string> entries = new();
 
@@ -98,11 +98,11 @@ public class Journal_V3
     }
 }
 
-// Moved saving on disk to new class
+// Moved saving to disk to new class
 public class PersistenceManager
 {
     public void SaveToFile(
-        Journal_V3 journal,
+        JournalV3 journal,
         string filename,
         bool overwrite = false)
     {
@@ -113,11 +113,11 @@ public class PersistenceManager
     }
 }
 
-public class JurnalClient_V3 : IClient
+public class JurnalClientV3 : IClient
 {
     public void DoSomething()
     {
-        Journal_V3 journal = new();
+        JournalV3 journal = new();
         journal.AddEntry("I cried a bit.");
         journal.AddEntry("I ate a wobbly worm.");
 
