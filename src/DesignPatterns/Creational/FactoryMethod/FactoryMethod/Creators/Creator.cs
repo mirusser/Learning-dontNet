@@ -1,8 +1,8 @@
 ﻿namespace FactoryMethod;
 
 /// <summary>
-/// The Creator class declares the factory method that is supposeed to return
-/// an object of a Product class. The Createor's subclasses usually provide
+/// The Creator class declares the factory method that is supposed to return
+/// an object of a Product class. The Creator's subclasses usually provide
 /// the implementation of this method
 /// </summary>
 internal abstract class Creator

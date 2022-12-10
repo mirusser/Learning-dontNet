@@ -5,7 +5,7 @@ internal class Client
     public void Do()
     {
         Console.WriteLine("App: Launched with the ConcreteCreator1.");
-        ClientCode(new ConcreteCreators());
+        ClientCode(new ConcreteCreator1());
 
         Console.WriteLine(Environment.NewLine);
 
@@ -15,7 +15,7 @@ internal class Client
 
     //The client code works with an instance of a concrete creator, albeit
     //through its base interface. As long as the client keeps working with
-    //the cretor via the base interface, you can pass it any creator's sublclass
+    //the creator via the base interface, you can pass it any creator's subclass
     public void ClientCode(Creator creator)
     {
         // ...

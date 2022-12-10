@@ -1,0 +1,4 @@
+﻿
+using CrossPlatformUIDemo;
+
+Client.Do();
