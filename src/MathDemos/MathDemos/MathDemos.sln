@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33103.201
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathDemos", "MathDemos\MathDemos.csproj", "{F4C24C4D-E9B3-42DD-ADBA-DEE87649D908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsDividable", "IsDividable\IsDividable.csproj", "{2902CC35-D7C5-42BF-9A97-A95B6330E2FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMath", "IsDividable\SimpleMath.csproj", "{2902CC35-D7C5-42BF-9A97-A95B6330E2FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{935A560E-8139-4A97-B654-BFF68AC402EF}"
 EndProject

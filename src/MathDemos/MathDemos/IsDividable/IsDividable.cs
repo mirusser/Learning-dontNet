@@ -1,6 +1,6 @@
 ﻿using Helpers;
 
-namespace IsDividable;
+namespace SimpleMath;
 
 public static class IsDividable
 {

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IsDividable\IsDividable.csproj" />
+    <ProjectReference Include="..\IsDividable\SimpleMath.csproj" />
   </ItemGroup>
 
 </Project>
