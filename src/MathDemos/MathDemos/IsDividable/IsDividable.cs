@@ -10,7 +10,7 @@ public static class IsDividable
         int divider = UserInputHelper.GetInteger("Enter divider:");
 
         //there is no point moving it to its own (even local) method
-        if (Run(numberToTest, divider)
+        if (Run(numberToTest, divider))
         {
             Console.WriteLine($"{numberToTest} is dividable by {divider}");
         }
