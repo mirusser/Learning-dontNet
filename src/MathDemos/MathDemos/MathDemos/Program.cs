@@ -15,8 +15,8 @@ var isExit = false;
 do
 {
     new Menu()
-          .Add("Is dividable?", () => DisplayOption(() => IsDividable.Run()))
-          .Add("Is prime?", () => DisplayOption(() => IsPrime.Run()))
+          .Add("Is dividable?", () => DisplayOption(() => IsDividable.ConsoleRun()))
+          .Add("Is prime?", () => DisplayOption(() => IsPrime.ConsoleRun()))
           .Add("Exit", () => isExit = true)
           .Display();
 
