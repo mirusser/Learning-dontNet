@@ -13,4 +13,4 @@ A collection of documents that have somewhat similar characteristics
 The basic unit of information that can be indexed
 
 - __Shard__ -
-Elasticsearch provides the ability to subdivide your index into muultiple pieces called shards
+Elasticsearch provides the ability to subdivide your index into multiple pieces called shards

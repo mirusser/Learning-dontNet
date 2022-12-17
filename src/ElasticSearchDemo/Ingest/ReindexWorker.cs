@@ -29,6 +29,8 @@ public class ReindexWorker : BackgroundService
         if (newIndexResponse?.IsValid == true)
         {
             await Reindex();
+
+            await UpdateAlias();
         }
 
         applicationLifetime.StopApplication();
@@ -89,7 +91,10 @@ public class ReindexWorker : BackgroundService
             }
 
             logger.LogInformation("Reindex completed");
+        }
 
+        async Task UpdateAlias()
+        {
             await elasticClient.Indices.BulkAliasAsync(aliases => aliases
                 .Remove(a => a.Alias(Indexes.Aliases.StockDemo).Index("*"))
                 .Add(a => a.Alias(Indexes.Aliases.StockDemo).Index(Indexes.StockDemoV2)),

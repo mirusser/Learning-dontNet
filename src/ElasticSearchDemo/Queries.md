@@ -41,3 +41,10 @@ DELETE /stock-demo-v1
 ```json
 DELETE /stock-demo-v2
 ```
+
+## Additional info
+
+### Mapping
+```json
+GET stock-demo-v1/_mapping
+```
