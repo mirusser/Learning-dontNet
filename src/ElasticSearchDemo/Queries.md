@@ -30,3 +30,14 @@ POST stock-demo/_search
   }
 }
 ```
+
+## Delete
+
+### Delete index
+```json
+DELETE /stock-demo-v1
+```
+
+```json
+DELETE /stock-demo-v2
+```

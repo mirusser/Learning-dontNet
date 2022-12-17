@@ -22,29 +22,54 @@ public class ReindexWorker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken = default)
     {
-        var response = await elasticClient.Indices.ExistsAsync(
-            Indexes.StockDemoV2,
-            ct: stoppingToken);
+        await DeleteIndexIfExists();
 
-        if (response.Exists)
+        var newIndexResponse = await CreateIndex();
+
+        if (newIndexResponse?.IsValid == true)
         {
-            await elasticClient.Indices.DeleteAsync(
-                Indexes.StockDemoV2,
-                ct: stoppingToken);
+            await Reindex();
         }
 
-        var newIndexResponse = await elasticClient.Indices.CreateAsync(
-            Indexes.StockDemoV2, 
-            i =>
-                i.Map(m => m
-                    .AutoMap<StockData>()
-                    .Properties<StockData>(p => p
-                        .Keyword(k => k.Name(f => f.Name)))), 
-            stoppingToken);
+        applicationLifetime.StopApplication();
 
-        if (newIndexResponse.IsValid)
+        async Task DeleteIndexIfExists()
+        {
+            var response = await elasticClient.Indices.ExistsAsync(
+                Indexes.StockDemoV2,
+                ct: stoppingToken);
+
+            if (response.Exists)
+            {
+                logger.LogInformation(
+                    "Index: {stockDemoV2} exits, deleting", 
+                    Indexes.StockDemoV2);
+
+                await elasticClient.Indices.DeleteAsync(
+                    Indexes.StockDemoV2,
+                    ct: stoppingToken);
+            }
+        }
+
+        async Task<CreateIndexResponse?> CreateIndex()
         {
             logger.LogInformation("Create new index");
+
+            var newIndexResponse = await elasticClient.Indices.CreateAsync(
+                Indexes.StockDemoV2,
+                i =>
+                    i.Map(m => m
+                        .AutoMap<StockData>()
+                        .Properties<StockData>(p => p
+                            .Keyword(k => k.Name(f => f.Name)))),
+                stoppingToken);
+
+            return newIndexResponse;
+        }
+
+        async Task Reindex()
+        {
+            logger.LogInformation("Reindex");
 
             var reindex = await elasticClient
                     .ReindexOnServerAsync(
@@ -64,6 +89,13 @@ public class ReindexWorker : BackgroundService
             }
 
             logger.LogInformation("Reindex completed");
+
+            await elasticClient.Indices.BulkAliasAsync(aliases => aliases
+                .Remove(a => a.Alias(Indexes.Aliases.StockDemo).Index("*"))
+                .Add(a => a.Alias(Indexes.Aliases.StockDemo).Index(Indexes.StockDemoV2)),
+                stoppingToken);
+
+            logger.LogInformation("Alias updated");
         }
     }
 }

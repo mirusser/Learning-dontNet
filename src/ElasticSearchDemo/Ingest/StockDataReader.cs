@@ -4,7 +4,7 @@ namespace Ingest;
 
 public class StockDataReader
 {
-    internal IEnumerable<StockData?> StockData()
+    internal IEnumerable<StockData> StockData()
     {
         var filePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Data\\all_stocks_5yr.csv");
 

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.ExceptionServices;
+using Domain;
 using Domain.Consts;
 using Nest;
 
@@ -26,8 +27,8 @@ public class StockIngestWorker : BackgroundService
     //in case of errors look up: https://stackoverflow.com/a/63390110/11613167
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var bulkAll = client.BulkAll<Domain.StockData>(stockDataReader.StockData(),
-                b => b.Index(Domain.Consts.Indexes.StockDemoV1)
+        var bulkAll = client.BulkAll<StockData>(stockDataReader.StockData(),
+                b => b.Index(Indexes.StockDemoV1)
                     .BackOffRetries(2)
                     .BackOffTime(TimeSpan.FromSeconds(30))
                     .MaxDegreeOfParallelism(Environment.ProcessorCount)
@@ -58,8 +59,8 @@ public class StockIngestWorker : BackgroundService
         }
 
         await client.Indices.PutAliasAsync(
-            Domain.Consts.Indexes.StockDemoV1,
-            Domain.Consts.Indexes.Aliases.StockDemo,
+            Indexes.StockDemoV1,
+            Indexes.Aliases.StockDemo,
             ct: stoppingToken);
     }
 }
