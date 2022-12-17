@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Consts;
 using Nest;
 
 namespace Ingest
@@ -16,12 +17,13 @@ namespace Ingest
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<StockIngestWorker>();
+                    services.AddHostedService<ReindexWorker>();
                     services.AddSingleton<IElasticClient>(sp =>
                     {
                         var config = sp.GetRequiredService<IConfiguration>();
                         var settings = new ConnectionSettings() // default
-                            .DefaultIndex("an-example-index")
-                            .DefaultMappingFor<StockData>(i => i.IndexName("stock-demo-v1"))
+                            .DefaultIndex(Domain.Consts.Indexes.Default)
+                            .DefaultMappingFor<StockData>(i => i.IndexName(Domain.Consts.Indexes.StockDemoV1))
                             .EnableDebugMode()
                             .EnableApiVersioningHeader(); //https://github.com/elastic/elasticsearch-net/issues/6154
 

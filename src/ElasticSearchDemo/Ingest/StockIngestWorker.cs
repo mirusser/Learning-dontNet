@@ -1,4 +1,5 @@
 ﻿using System.Runtime.ExceptionServices;
+using Domain.Consts;
 using Nest;
 
 namespace Ingest;
@@ -25,8 +26,8 @@ public class StockIngestWorker : BackgroundService
     //in case of errors look up: https://stackoverflow.com/a/63390110/11613167
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var bulkAll = client.BulkAll(stockDataReader.StockData(),
-                b => b.Index("stock-demo-v1")
+        var bulkAll = client.BulkAll<Domain.StockData>(stockDataReader.StockData(),
+                b => b.Index(Domain.Consts.Indexes.StockDemoV1)
                     .BackOffRetries(2)
                     .BackOffTime(TimeSpan.FromSeconds(30))
                     .MaxDegreeOfParallelism(Environment.ProcessorCount)
@@ -56,6 +57,9 @@ public class StockIngestWorker : BackgroundService
             captureInfo?.Throw();
         }
 
-        await client.Indices.PutAliasAsync("stock-demo-v1", "stock-demo", ct: stoppingToken);
+        await client.Indices.PutAliasAsync(
+            Domain.Consts.Indexes.StockDemoV1,
+            Domain.Consts.Indexes.Aliases.StockDemo,
+            ct: stoppingToken);
     }
 }
