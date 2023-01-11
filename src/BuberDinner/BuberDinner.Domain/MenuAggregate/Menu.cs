@@ -1,11 +1,11 @@
-﻿using BuberDinner.Domain.Dinner.ValueObjects;
-using BuberDinner.Domain.Host.ValueObjects;
-using BuberDinner.Domain.Menu.Entities;
-using BuberDinner.Domain.Menu.ValueObjects;
-using BuberDinner.Domain.MenuReview.ValueObjects;
+﻿using BuberDinner.Domain.DinnerAggregate.ValueObjects;
+using BuberDinner.Domain.HostAggregate.ValueObjects;
+using BuberDinner.Domain.MenuAggregate.Entities;
+using BuberDinner.Domain.MenuAggregate.ValueObjects;
+using BuberDinner.Domain.MenuReviewAggregate.ValueObjects;
 using BuberDinner.Domain.Models;
 
-namespace BuberDinner.Domain.Menu;
+namespace BuberDinner.Domain.MenuAggregate;
 
 public sealed class Menu : AggregateRoot<MenuId>
 {
@@ -24,6 +24,7 @@ public sealed class Menu : AggregateRoot<MenuId>
 
     public DateTime CreatedDateTime { get; }
     public DateTime UpdatedDateTime { get; }
+
     public Menu(
         MenuId menuId,
         string name,

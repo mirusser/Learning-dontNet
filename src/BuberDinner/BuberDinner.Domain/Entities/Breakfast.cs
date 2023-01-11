@@ -29,4 +29,27 @@ public class Breakfast
     public List<string> Sweet { get; set; } = null!;
     //public Guid Guid { get; }
     //public DateTime UtcNow { get; }
+
+    public Breakfast(
+        Guid id,
+        string name,
+        string description,
+        DateTime startDateTime,
+        DateTime endDateTime,
+        List<string> savory,
+        List<string> sweet)
+    {
+        Id = id;
+        Name = name;
+        Description = description;
+        StartDateTime = startDateTime;
+        EndDateTime = endDateTime;
+        Savory = savory;
+        Sweet = sweet;
+    }
+
+    public Breakfast()
+    {
+        
+    }
 }

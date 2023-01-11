@@ -1,6 +1,4 @@
-﻿using BuberDinner.Application.Authentication.Commands.Common;
-using BuberDinner.Application.Authentication.Register;
-using ErrorOr;
+﻿using ErrorOr;
 using FluentValidation;
 using MediatR;
 
@@ -20,8 +18,8 @@ public class ValidationBehavior<TRequest, TResponse> :
 
     public async Task<TResponse> Handle(
         TRequest request,
-        CancellationToken cancellationToken,
-        RequestHandlerDelegate<TResponse> next)
+        RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         if (validator is null)
         {

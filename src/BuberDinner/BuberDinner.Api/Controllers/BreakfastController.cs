@@ -8,7 +8,7 @@ namespace BuberDinner.Api.Controllers;
 [Route("[controller]")]
 public class BreakfastController : ApiController
 {
-    private IBreakfastService breakfastService;
+    private readonly IBreakfastService breakfastService;
 
     public BreakfastController(IBreakfastService breakfastService)
     {
