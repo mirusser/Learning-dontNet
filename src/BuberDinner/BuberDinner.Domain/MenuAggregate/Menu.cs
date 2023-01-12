@@ -1,4 +1,5 @@
-﻿using BuberDinner.Domain.DinnerAggregate.ValueObjects;
+﻿using BuberDinner.Domain.Common.ValueObjects;
+using BuberDinner.Domain.DinnerAggregate.ValueObjects;
 using BuberDinner.Domain.HostAggregate.ValueObjects;
 using BuberDinner.Domain.MenuAggregate.Entities;
 using BuberDinner.Domain.MenuAggregate.ValueObjects;
@@ -15,7 +16,7 @@ public sealed class Menu : AggregateRoot<MenuId>
 
     public string Name { get; }
     public string Description { get; }
-    public float AverageRating { get; }
+    public AverageRating AverageRating { get; }
     public IReadOnlyList<MenuSection> Sections => sections.AsReadOnly();
 
     public HostId HostId { get; }
@@ -30,12 +31,16 @@ public sealed class Menu : AggregateRoot<MenuId>
         string name,
         string description,
         HostId hostId,
+        AverageRating averageRating,
+        List<MenuSection> sections,
         DateTime createdDateTime,
         DateTime updatedDateTime) : base(menuId)
     {
         Name = name;
         Description = description;
         HostId = hostId;
+        AverageRating = averageRating;
+        this.sections = sections;
         CreatedDateTime = createdDateTime;
         UpdatedDateTime = updatedDateTime;
     }
@@ -43,13 +48,16 @@ public sealed class Menu : AggregateRoot<MenuId>
     public static Menu Create(
         string name,
         string description,
-        HostId hostId)
+        string hostId,
+        List<MenuSection>? sections)
     {
         return new(
             MenuId.CreteUnique(),
             name,
             description,
-            hostId,
+            HostId.Create(hostId),
+            AverageRating.CreateNew(),
+            sections ?? new(),
             DateTime.UtcNow,
             DateTime.UtcNow);
     }

@@ -16,6 +16,16 @@ public sealed class HostId : ValueObject
         return new(Guid.NewGuid());
     }
 
+    public static HostId Create(string value)
+    {
+        if (Guid.TryParse(value, out var id))
+        {
+            return new(id);
+        }
+
+        throw new Exception($"Couldn't parse value: {value} to Guid");
+    }
+
     public override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;

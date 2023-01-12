@@ -13,19 +13,23 @@ public sealed class MenuSection : Entity<MenuSectionId>
     public MenuSection(
         MenuSectionId id,
         string name,
-        string description) : base(id)
+        string description,
+        List<MenuItem> items) : base(id)
     {
         Name = name;
         Description = description;
+        this.items = items;
     }
 
     public static MenuSection Create(
         string name,
-        string description)
+        string description,
+        List<MenuItem> items)
     {
         return new(
             MenuSectionId.CreteUnique(),
             name,
-            description);
+            description,
+            items);
     }
 }
