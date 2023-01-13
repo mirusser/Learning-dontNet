@@ -4,7 +4,7 @@ namespace BuberDinner.Domain.HostAggregate.ValueObjects;
 
 public sealed class HostId : ValueObject
 {
-    public Guid Value { get; }
+    public Guid Value { get; private set; }
 
     private HostId(Guid value)
     {
@@ -24,6 +24,11 @@ public sealed class HostId : ValueObject
         }
 
         throw new Exception($"Couldn't parse value: {value} to Guid");
+    }
+
+    public static HostId Create(Guid value)
+    {
+        return new(value);
     }
 
     public override IEnumerable<object> GetEqualityComponents()

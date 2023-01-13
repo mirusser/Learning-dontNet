@@ -15,6 +15,8 @@ public sealed class AverageRating : ValueObject
         NumRatings = numRatings;
     }
 
+    private AverageRating() { }
+
     public static AverageRating CreateNew(double rating = 0, int numRatings = 0)
     {
         return new AverageRating(rating, numRatings);

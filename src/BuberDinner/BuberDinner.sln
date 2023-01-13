@@ -14,6 +14,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Domain", "BuberDinner.Domain\BuberDinner.Domain.csproj", "{39CA6105-CB4A-410C-87C7-4441FFCDA956}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_docs", "_docs", "{407A4621-2A0D-498D-B233-C09ACC91B584}"
+	ProjectSection(SolutionItems) = preProject
+		EFCoreAdditionalInfo.md = EFCoreAdditionalInfo.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModels", "DomainModels", "{51347EC2-3D8A-4947-A7B7-9E74C13F3DA5}"
 	ProjectSection(SolutionItems) = preProject

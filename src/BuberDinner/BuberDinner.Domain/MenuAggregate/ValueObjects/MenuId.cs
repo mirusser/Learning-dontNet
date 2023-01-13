@@ -13,7 +13,14 @@ public sealed class MenuId : ValueObject
 
     public static MenuId CreteUnique()
     {
+        // TODO: enforce invariants
         return new(Guid.NewGuid());
+    }
+
+    public static MenuId Create(Guid value)
+    {
+        // TODO: enforce invariants
+        return new(value);
     }
 
     public override IEnumerable<object> GetEqualityComponents()
