@@ -1,9 +1,11 @@
 ﻿using BuberDinner.Application.Common.Errors;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuberDinner.Api.Controllers;
 
+[AllowAnonymous]
 public class ErrorsController : ControllerBase
 {
     [Route("/error")]

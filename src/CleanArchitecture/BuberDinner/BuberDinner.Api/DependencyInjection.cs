@@ -12,9 +12,6 @@ public static class DependencyInjection
         services.AddSingleton<ProblemDetailsFactory, BuberDinnerProblemDetailsFactory>();
         services.AddMappings();
 
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
-
         return services;
     }
 }
