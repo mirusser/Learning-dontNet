@@ -14,6 +14,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Infrastructure", "BuberDinner.Infrastructure\BuberDinner.Infrastructure.csproj", "{FD81D9B0-41C5-4658-9BEC-3955B71C297A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_docs", "_docs", "{458098E1-A7C9-45DD-B5EF-78D274C09F50}"
+	ProjectSection(SolutionItems) = preProject
+		DomainModels.md = DomainModels.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModels", "DomainModels", "{EA490C97-047B-423B-9254-536B5CCC4C06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,5 +49,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EA490C97-047B-423B-9254-536B5CCC4C06} = {458098E1-A7C9-45DD-B5EF-78D274C09F50}
 	EndGlobalSection
 EndGlobal
