@@ -2,7 +2,7 @@
 using BuberDinner.Application.Common.Interfaces.Authentication;
 using BuberDinner.Application.Common.Interfaces.Persistence;
 using BuberDinner.Domain.Common.Errors;
-using BuberDinner.Domain.Entities;
+using BuberDinner.Domain.UserAggregate;
 using ErrorOr;
 using MediatR;
 
@@ -28,7 +28,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<Authenticat
         await Task.CompletedTask;
 
         // 1. Validate the user exists
-        if (userRepository.GetUserByEmail(query.FirstName) is not User user)
+        if (userRepository.GetUserByEmail(query.Email) is not User user)
         {
             return Errors.Authentication.InvalidCredentials;
         }

@@ -16,17 +16,6 @@ public abstract class ValueObject : IEquatable<ValueObject>
         return GetEqualityComponents()
             .SequenceEqual(valueObject.GetEqualityComponents());
     }
-
-    public static bool operator ==(ValueObject left, ValueObject right)
-    {
-        return Equals(left, right);
-    }
-
-    public static bool operator !=(ValueObject left, ValueObject right)
-    {
-        return !Equals(left, right);
-    }
-
     public override int GetHashCode()
     {
         return GetEqualityComponents()
@@ -38,4 +27,15 @@ public abstract class ValueObject : IEquatable<ValueObject>
     {
         return Equals((object?)other);
     }
+
+    public static bool operator ==(ValueObject left, ValueObject right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(ValueObject left, ValueObject right)
+    {
+        return !Equals(left, right);
+    }
+
 }

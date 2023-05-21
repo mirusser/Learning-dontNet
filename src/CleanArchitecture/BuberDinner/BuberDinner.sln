@@ -13,12 +13,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Domain", "Buber
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Infrastructure", "BuberDinner.Infrastructure\BuberDinner.Infrastructure.csproj", "{FD81D9B0-41C5-4658-9BEC-3955B71C297A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_docs", "_docs", "{458098E1-A7C9-45DD-B5EF-78D274C09F50}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_docs", "_docs", "{027B855D-C9D0-49C9-8477-828F67117024}"
 	ProjectSection(SolutionItems) = preProject
-		DomainModels.md = DomainModels.md
+		_docs\Aggregates.Menu.md = _docs\Aggregates.Menu.md
+		_docs\DomainModels.md = _docs\DomainModels.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModels", "DomainModels", "{EA490C97-047B-423B-9254-536B5CCC4C06}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{72DB8BCC-FCA1-4082-9D30-1AC752D8A752}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.Props = Directory.Build.Props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,7 +54,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EA490C97-047B-423B-9254-536B5CCC4C06} = {458098E1-A7C9-45DD-B5EF-78D274C09F50}
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D94FE1B2-E2A8-4638-B652-BEAC70DF10D2}
 	EndGlobalSection
 EndGlobal

@@ -1,14 +1,23 @@
 ﻿using BuberDinner.Application.Common.Interfaces.Persistence;
-using BuberDinner.Domain.Entities;
+using BuberDinner.Domain.UserAggregate;
 
 namespace BuberDinner.Infrastructure.Persistence;
 
 public class UserRepository : IUserRepository
 {
-    private readonly static List<User> users = new();
+    private static readonly List<User> users = new();
 
     public void Add(User user)
     {
+        if (user.Id is null)
+        {
+            user = User.Create(
+                user.FirstName,
+                user.LastName,
+                user.Email,
+                user.Password);
+        }
+
         users.Add(user);
     }
 
