@@ -50,9 +50,9 @@ public sealed class Menu : AggregateRoot<MenuId>
     }
 
     public static Menu Create(
+        string hostId,
         string name,
         string description,
-        string hostId,
         List<MenuSection>? sections)
     {
         return new(
