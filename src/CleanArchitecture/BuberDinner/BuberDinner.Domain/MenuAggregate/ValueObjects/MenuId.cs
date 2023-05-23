@@ -4,7 +4,11 @@ namespace BuberDinner.Domain.MenuAggregate.ValueObjects;
 
 public sealed class MenuId : ValueObject
 {
-    public Guid Value { get; }
+    public Guid Value { get; private set; }
+
+    private MenuId()
+    {
+    }
 
     private MenuId(Guid value)
     {

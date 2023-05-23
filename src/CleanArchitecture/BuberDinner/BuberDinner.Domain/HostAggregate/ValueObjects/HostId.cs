@@ -6,6 +6,10 @@ public sealed class HostId : ValueObject
 {
     public Guid Value { get; private set; }
 
+    private HostId()
+    {
+    }
+
     private HostId(Guid value)
     {
         Value = value;

@@ -5,12 +5,13 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
 {
     public TId Id { get; protected set; }
 
+    protected Entity() {}
+
     protected Entity(TId id)
     {
         Id = id;
     }
 
-    protected Entity() {}
 
     public override bool Equals(object? obj)
     {

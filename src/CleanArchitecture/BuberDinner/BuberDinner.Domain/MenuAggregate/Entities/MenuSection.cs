@@ -6,10 +6,14 @@ namespace BuberDinner.Domain.MenuAggregate.Entities;
 public sealed class MenuSection : Entity<MenuSectionId>
 {
     private readonly List<MenuItem> items = new();
-    public string Name { get; }
-    public string Description { get; }
+    public string Name { get; private set; }
+    public string Description { get; private set; }
 
     public IReadOnlyList<MenuItem> Items => items.AsReadOnly();
+
+    private MenuSection()
+    {
+    }
 
     public MenuSection(
         MenuSectionId id,
