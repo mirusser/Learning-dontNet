@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuberDinner.Infrastructure.Migrations
 {
     [DbContext(typeof(BuberDinnerDbContext))]
-    [Migration("20230523115941_InitialCreate")]
+    [Migration("20230524163251_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
