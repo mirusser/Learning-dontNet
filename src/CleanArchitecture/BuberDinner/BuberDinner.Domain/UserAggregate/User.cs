@@ -5,10 +5,10 @@ namespace BuberDinner.Domain.UserAggregate;
 
 public sealed class User : AggregateRoot<UserId, Guid>
 {
-    public string FirstName { get; set; } = null!;
-    public string LastName { get; set; } = null!;
-    public string Email { get; set; } = null!;
-    public string Password { get; set; } = null!;
+    public string FirstName { get; private set; } = null!;
+    public string LastName { get; private set; } = null!;
+    public string Email { get; private set; } = null!;
+    public string Password { get; private set; } = null!;
 
     private User() { }
 
@@ -31,11 +31,13 @@ public sealed class User : AggregateRoot<UserId, Guid>
         string email,
         string password)
     {
-        return new (
+        User user = new (
             UserId.CreateUnique(),
             firstName,
             lastName,
             email,
             password);
+
+        return user;
     }
 }

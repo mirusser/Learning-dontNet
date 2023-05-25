@@ -1,11 +1,15 @@
 ﻿namespace BuberDinner.Domain.Common.Models;
 
-public abstract class Entity<TId> : IEquatable<Entity<TId>>
-    where TId : notnull
+public abstract class Entity<TId> : IEquatable<Entity<TId>>, IHasDomainEvents
+    where TId : ValueObject
 {
+    private readonly List<IDomainEvent> domainEvents = new();
+
     public TId Id { get; protected set; }
 
-    protected Entity() {}
+    public IReadOnlyList<IDomainEvent> DomainEvents => domainEvents.AsReadOnly();
+
+    protected Entity() { }
 
     protected Entity(TId id)
     {
@@ -23,7 +27,7 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
         return Equals((object?)other);
     }
 
-    public static bool operator == (Entity<TId> left, Entity<TId> right)
+    public static bool operator ==(Entity<TId> left, Entity<TId> right)
     {
         return Equals(left, right);
     }
@@ -36,5 +40,15 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
     public override int GetHashCode()
     {
         return Id.GetHashCode();
+    }
+
+    public void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        domainEvents.Add(domainEvent);
+    }
+
+    public void ClearDomainEvents()
+    {
+        domainEvents.Clear();
     }
 }

@@ -26,4 +26,9 @@ public sealed class UserId : AggregateRootId<Guid>
     {
         yield return Value;
     }
+
+    public static implicit operator Guid(UserId data)
+    {
+        return data.Value;
+    }
 }

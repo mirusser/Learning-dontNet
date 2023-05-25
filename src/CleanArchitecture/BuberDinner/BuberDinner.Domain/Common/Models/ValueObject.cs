@@ -16,6 +16,7 @@ public abstract class ValueObject : IEquatable<ValueObject>
         return GetEqualityComponents()
             .SequenceEqual(valueObject.GetEqualityComponents());
     }
+
     public override int GetHashCode()
     {
         return GetEqualityComponents()
@@ -37,5 +38,4 @@ public abstract class ValueObject : IEquatable<ValueObject>
     {
         return !Equals(left, right);
     }
-
 }

@@ -17,7 +17,6 @@ public class UserRepository : IUserRepository
                 user.Email,
                 user.Password);
         }
-
         users.Add(user);
     }
 
