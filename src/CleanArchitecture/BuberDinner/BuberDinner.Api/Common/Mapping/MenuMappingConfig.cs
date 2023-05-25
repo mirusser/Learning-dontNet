@@ -16,7 +16,7 @@ public class MenuMappingConfig : IRegister
             .Map(dest => dest, src => src.Request);
 
         config.NewConfig<Menu, MenuResponse>()
-            .Map(dest => dest.Id, src => src.Id.Value)
+            .Map(dest => dest.Id, src => src.GetId())
             .Map(dest => dest.AverageRating,
                 src => src.AverageRating.NumRatings > 0
                 ? src.AverageRating.Value.ToString()

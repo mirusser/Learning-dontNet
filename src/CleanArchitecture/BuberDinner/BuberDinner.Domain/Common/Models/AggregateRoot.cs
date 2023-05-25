@@ -8,6 +8,10 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
     protected AggregateRoot()
     { }
 
-    protected AggregateRoot(TId id) : base(id)
-    { }
+    protected AggregateRoot(TId id)
+    {
+        Id = id;
+    }
+
+    public AggregateRootId<TIdType> GetId() => this.Id;
 }

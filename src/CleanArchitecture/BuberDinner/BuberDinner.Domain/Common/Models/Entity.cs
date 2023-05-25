@@ -1,7 +1,7 @@
 ﻿namespace BuberDinner.Domain.Common.Models;
 
 public abstract class Entity<TId> : IEquatable<Entity<TId>>, IHasDomainEvents
-    where TId : ValueObject
+    where TId : notnull
 {
     private readonly List<IDomainEvent> domainEvents = new();
 
