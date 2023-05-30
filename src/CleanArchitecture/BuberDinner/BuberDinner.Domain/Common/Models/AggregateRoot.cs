@@ -13,5 +13,6 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
         Id = id;
     }
 
+    // Fix (hack) for mapster mapping configuration
     public AggregateRootId<TIdType> GetId() => this.Id;
 }

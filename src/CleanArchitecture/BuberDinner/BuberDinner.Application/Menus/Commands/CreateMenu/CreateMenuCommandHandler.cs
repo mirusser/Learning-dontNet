@@ -18,10 +18,8 @@ public class CreateMenuCommandHandler
 
     public async Task<ErrorOr<Menu>> Handle(
         CreateMenuCommand request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
-        await Task.CompletedTask;
-
         // Create Menu
         var menu = Menu.Create(
             hostId: request.HostId,
@@ -34,7 +32,7 @@ public class CreateMenuCommandHandler
                     item.Name,
                     item.Description)))));
         // Persist Menu
-        menuRepository.Add(menu);
+        await menuRepository.AddAsync(menu);
         // Return Menu
 
         return menu;

@@ -17,4 +17,10 @@ public class MenuRepository : IMenuRepository
         dbContext.Add(menu);
         dbContext.SaveChanges();
     }
+
+    public async Task AddAsync(Menu menu)
+    {
+        await dbContext.AddAsync(menu);
+        await dbContext.SaveChangesAsync();
+    }
 }
