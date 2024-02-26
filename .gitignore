@@ -456,3 +456,7 @@ $RECYCLE.BIN/
 /src/AsynchronousAPI/RequestDb.db
 /src/AsynchronousAPI/RequestDb.db-shm
 /src/AsynchronousAPI/RequestDb.db-wal
+/src/GrpcToRestDemo/ToDoDatabase.db
+/src/GrpcToRestDemo/appsettings.Development.json
+/src/GrpcToRestDemo/ToDoDatabase.db-shm
+/src/GrpcToRestDemo/ToDoDatabase.db-wal
