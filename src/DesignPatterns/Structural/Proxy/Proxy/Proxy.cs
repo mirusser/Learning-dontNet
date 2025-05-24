@@ -1,15 +1,8 @@
 ﻿namespace Proxy;
 
 // The Proxy has an interface identical to the RealSubject.
-internal class Proxy : ISubject
+internal class Proxy(RealSubject realSubject) : ISubject
 {
-    private RealSubject realSubject;
-
-    public Proxy(RealSubject realSubject)
-    {
-        this.realSubject = realSubject;
-    }
-
     // The most common applications of the Proxy pattern are lazy loading,
     // caching, controlling the access, logging, etc. A Proxy can perform
     // one of these things and then, depending on the result, pass the
@@ -18,13 +11,13 @@ internal class Proxy : ISubject
     {
         if (this.CheckAccess())
         {
-            this.realSubject.Request();
+            realSubject.Request();
 
             this.LogAccess();
         }
     }
 
-    public bool CheckAccess()
+    private bool CheckAccess()
     {
         // Some real checks should go here.
         Console.WriteLine("Proxy: Checking access prior to firing a real request.");
@@ -32,7 +25,7 @@ internal class Proxy : ISubject
         return true;
     }
 
-    public void LogAccess()
+    private void LogAccess()
     {
         Console.WriteLine("Proxy: Logging the time of request.");
     }

@@ -48,6 +48,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facade", "Structural\Facade\Facade\Facade.csproj", "{8DBF8DD5-A754-4AE0-BD5A-01431E93E58B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flyweight", "Flyweight", "{BC11709E-2B43-4897-844A-C99BCDF2894D}"
+	ProjectSection(SolutionItems) = preProject
+		Structural\Flyweight\doc.md = Structural\Flyweight\doc.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flyweight", "Structural\Flyweight\Flyweight\Flyweight.csproj", "{E1408305-22FB-4B0F-8EA8-9D75B03344A8}"
 EndProject

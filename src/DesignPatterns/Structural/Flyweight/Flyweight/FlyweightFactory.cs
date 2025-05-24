@@ -53,7 +53,7 @@ public class FlyweightFactory
     {
         string key = GetKey(sharedState);
 
-        if (!flyweights.Where(t => t.key == key).Any())
+        if (flyweights.All(t => t.key != key))
         {
             Console.WriteLine("FlyweightFactory: Can't find a flyweight, creating new one.");
             this.flyweights.Add(new (new(sharedState), key));
@@ -64,8 +64,7 @@ public class FlyweightFactory
         }
 
         return this.flyweights
-            .Where(t => t.key == key)
-            .FirstOrDefault()
+            .FirstOrDefault(t => t.key == key)
             .flyweight;
     }
 
