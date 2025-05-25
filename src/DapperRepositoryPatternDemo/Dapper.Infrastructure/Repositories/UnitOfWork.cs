@@ -5,15 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dapper.Infrastructure.Repositories
-{
-    public class UnitOfWork : IUnitOfWork
-    {
-        public UnitOfWork(IProductRepository products)
-        {
-            Products = products;
-        }
+namespace Dapper.Infrastructure.Repositories;
 
-        public IProductRepository Products { get; }
-    }
+public class UnitOfWork(IProductRepository products) : IUnitOfWork
+{
+    public IProductRepository Products { get; } = products;
 }

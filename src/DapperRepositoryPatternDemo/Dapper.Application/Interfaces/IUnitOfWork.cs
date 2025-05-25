@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dapper.Application.Interfaces
+namespace Dapper.Application.Interfaces;
+
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        IProductRepository Products { get; }
-    }
+    IProductRepository Products { get; }
 }

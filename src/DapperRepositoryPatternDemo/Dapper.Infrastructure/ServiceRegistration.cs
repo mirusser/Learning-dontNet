@@ -7,14 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dapper.Infrastructure
+namespace Dapper.Infrastructure;
+
+public static class ServiceRegistration
 {
-    public static class ServiceRegistration
+    public static void AddInfrastructure(this IServiceCollection services)
     {
-        public static void AddInfrastructure(this IServiceCollection services)
-        {
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-        }
+        services.AddTransient<IProductRepository, ProductRepository>();
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
     }
 }
