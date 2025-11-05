@@ -50,8 +50,12 @@ public static class Examples
     private static void Class_MutateThroughReference()
     {
         var holder = new StringHolderClass { Value = "Hello" };
-        ClassChange_Mutate(holder); // mutate object via the same reference
-        Console.WriteLine(holder.Value); // Expected: Hello world
+        ClassChangeMutate(holder); // mutate object via the same reference
+        Console.WriteLine($"{nameof(Class_MutateThroughReference)} - {holder.Value}"); // Expected: Hello world
+        return;
+
+        void ClassChangeMutate(StringHolderClass c)
+            => c.Value += " world";
     }
 
     // Reassigning the *parameter variable* to a new object does not change the caller's variable,
@@ -59,8 +63,12 @@ public static class Examples
     private static void Class_ReassignLocalParameter_DoesNotChangeCaller()
     {
         var holder = new StringHolderClass { Value = "Hello" };
-        ClassChange_ReassignParameter(holder); // only the local parameter now points to new object
-        Console.WriteLine(holder.Value); // Expected: Hello
+        ClassChangeReassignParameter(holder); // only the local parameter now points to new object
+        Console.WriteLine($"{nameof(Class_ReassignLocalParameter_DoesNotChangeCaller)} - {holder.Value}"); // Expected: Hello
+        return;
+
+        void ClassChangeReassignParameter(StringHolderClass c)
+            => c = new StringHolderClass { Value = "Goodbye World" }; // caller's variable unaffected
     }
 
     // With 'ref', we pass the *variable itself* by reference, so we can mutate the target object
@@ -68,16 +76,24 @@ public static class Examples
     private static void Class_Ref_MutateThroughReference()
     {
         var holder = new StringHolderClass { Value = "Hello" };
-        ClassChangeRef_Mutate(ref holder);
-        Console.WriteLine(holder.Value); // Expected: Hello world
+        ClassChangeRefMutate(ref holder);
+        Console.WriteLine($"{nameof(Class_Ref_MutateThroughReference)} - {holder.Value}"); // Expected: Hello world
+        return;
+
+        void ClassChangeRefMutate(ref StringHolderClass c)
+            => c.Value += " world";
     }
 
     // With 'ref', we can also *reassign* the caller's variable to a different object.
     private static void Class_Ref_ReassignChangesCaller()
     {
         var holder = new StringHolderClass { Value = "Hello" };
-        ClassChangeRef_Reassign(ref holder);
-        Console.WriteLine(holder.Value); // Expected: Goodbye World
+        ClassChangeRefReassign(ref holder);
+        Console.WriteLine($"{nameof(Class_Ref_ReassignChangesCaller)} - {holder.Value}"); // Expected: Goodbye World
+        return;
+
+        void ClassChangeRefReassign(ref StringHolderClass c)
+            => c = new StringHolderClass { Value = "Goodbye World" }; // caller's variable now points to new object
     }
 
     // 'in' on a class param: the *reference* itself is readonly, but the object is still mutable.
@@ -85,8 +101,15 @@ public static class Examples
     private static void Class_In_MutateObjectButNotReference()
     {
         var holder = new StringHolderClass { Value = "Hello" };
-        ClassChangeIn_MutateObject(in holder);
-        Console.WriteLine(holder.Value); // Expected: Hello world
+        ClassChangeInMutateObject(in holder);
+        Console.WriteLine($"{nameof(Class_In_MutateObjectButNotReference)} - {holder.Value}"); // Expected: Hello world
+        return;
+
+        void ClassChangeInMutateObject(in StringHolderClass c)
+        {
+            c.Value += " world"; // allowed: object is mutable; the readonly is on the *reference*, not the object
+            // c = new StringHolderClass(); // not allowed: cannot reassign 'in' parameter
+        }
     }
 
     // -------------------------------
@@ -97,15 +120,23 @@ public static class Examples
     private static void Struct_ByValue_CopyIsMutatedOriginalUnaffected()
     {
         var holder = new StringHolderStruct { Value = "Hello" };
-        StructChange_Mutate(holder); // mutate the copy
-        Console.WriteLine(holder.Value); // Expected: Hello
+        StructChangeMutate(holder); // mutate the copy
+        Console.WriteLine($"{nameof(Struct_ByValue_CopyIsMutatedOriginalUnaffected)} - {holder.Value}"); // Expected: Hello
+        return;
+
+        void StructChangeMutate(StringHolderStruct s)
+            => s.Value += " world"; // mutates the copy
     }
 
     private static void Struct_ByValue_ReassignLocalParameter_DoesNotChangeCaller()
     {
         var holder = new StringHolderStruct { Value = "Hello" };
-        StructChange_ReassignParameter(holder); // reassigns only the local copy
-        Console.WriteLine(holder.Value); // Expected: Hello
+        StructChangeReassignParameter(holder); // reassigns only the local copy
+        Console.WriteLine($"{nameof(Struct_ByValue_ReassignLocalParameter_DoesNotChangeCaller)} - {holder.Value}"); // Expected: Hello
+        return;
+
+        void StructChangeReassignParameter(StringHolderStruct s)
+            => s = new StringHolderStruct { Value = "Goodbye World" }; // reassigns only the copy
     }
 
     // 'ref' with a struct gives access to the caller's variable (no copy),
@@ -113,24 +144,40 @@ public static class Examples
     private static void Struct_Ref_MutateOriginal()
     {
         var holder = new StringHolderStruct { Value = "Hello" };
-        StructChangeRef_Mutate(ref holder);
-        Console.WriteLine(holder.Value); // Expected: Hello world
+        StructChangeRefMutate(ref holder);
+        Console.WriteLine($"{nameof(Struct_Ref_MutateOriginal)} - {holder.Value}"); // Expected: Hello world
+        return;
+
+        void StructChangeRefMutate(ref StringHolderStruct s)
+            => s.Value += " world"; // mutates caller's variable
     }
 
     // With 'ref', reassignment replaces the caller's value entirely.
     private static void Struct_Ref_ReassignChangesCaller()
     {
         var holder = new StringHolderStruct { Value = "Hello" };
-        StructChangeRef_Reassign(ref holder);
-        Console.WriteLine(holder.Value); // Expected: Goodbye World
+        StructChangeRefReassign(ref holder);
+        Console.WriteLine($"{nameof(Struct_Ref_ReassignChangesCaller)} - {holder.Value}"); // Expected: Goodbye World
+        return;
+
+        void StructChangeRefReassign(ref StringHolderStruct s)
+            => s = new StringHolderStruct { Value = "Goodbye World" }; // replaces caller's value
     }
 
     // 'in' with a struct is a readonly reference: no mutation through the parameter and no reassignment.
     private static void Struct_In_Readonly_NoMutationNoReassign()
     {
         var holder = new StringHolderStruct { Value = "Hello" };
-        StructChangeIn_Readonly(in holder);
-        Console.WriteLine(holder.Value); // Expected: Hello
+        StructChangeInReadonly(in holder);
+        Console.WriteLine($"{nameof(Struct_In_Readonly_NoMutationNoReassign)} - {holder.Value}"); // Expected: Hello
+        return;
+
+        void StructChangeInReadonly(in StringHolderStruct s)
+        {
+            // s.Value += " world"; // not allowed: cannot mutate through 'in' for a struct
+            // s = new StringHolderStruct(); // not allowed: cannot reassign an 'in' parameter
+            _ = s.ToString(); // safe read-only usage
+        }
     }
 
     // -------------------------------
@@ -141,52 +188,11 @@ public static class Examples
     private static void RefStruct_Ref_MutateOriginal()
     {
         var holder = new StringHolderRefStruct { Value = "Hello" };
-        RefStructChangeRef_Mutate(ref holder);
-        Console.WriteLine(holder.Value); // Expected: Hello world
+        RefStructChangeRefMutate(ref holder);
+        Console.WriteLine($"{nameof(RefStruct_Ref_MutateOriginal)} - {holder.Value}"); // Expected: Hello world
+        return;
+
+        void RefStructChangeRefMutate(ref StringHolderRefStruct s)
+            => s.Value += " world";
     }
-
-    // ===== Change helpers (one responsibility each) =====
-
-    // Class helpers
-    private static void ClassChange_Mutate(StringHolderClass c)
-        => c.Value += " world";
-
-    private static void ClassChange_ReassignParameter(StringHolderClass c)
-        => c = new StringHolderClass { Value = "Goodbye World" }; // caller's variable unaffected
-
-    private static void ClassChangeRef_Mutate(ref StringHolderClass c)
-        => c.Value += " world";
-
-    private static void ClassChangeRef_Reassign(ref StringHolderClass c)
-        => c = new StringHolderClass { Value = "Goodbye World" }; // caller's variable now points to new object
-
-    private static void ClassChangeIn_MutateObject(in StringHolderClass c)
-    {
-        c.Value += " world"; // allowed: object is mutable; the readonly is on the *reference*, not the object
-        // c = new StringHolderClass(); // not allowed: cannot reassign 'in' parameter
-    }
-
-    // Struct helpers
-    private static void StructChange_Mutate(StringHolderStruct s)
-        => s.Value += " world"; // mutates the copy
-
-    private static void StructChange_ReassignParameter(StringHolderStruct s)
-        => s = new StringHolderStruct { Value = "Goodbye World" }; // reassigns only the copy
-
-    private static void StructChangeRef_Mutate(ref StringHolderStruct s)
-        => s.Value += " world"; // mutates caller's variable
-
-    private static void StructChangeRef_Reassign(ref StringHolderStruct s)
-        => s = new StringHolderStruct { Value = "Goodbye World" }; // replaces caller's value
-
-    private static void StructChangeIn_Readonly(in StringHolderStruct s)
-    {
-        // s.Value += " world"; // not allowed: cannot mutate through 'in' for a struct
-        // s = new StringHolderStruct(); // not allowed: cannot reassign an 'in' parameter
-        _ = s.ToString(); // safe read-only usage
-    }
-
-    // Ref struct helpers
-    private static void RefStructChangeRef_Mutate(ref StringHolderRefStruct s)
-        => s.Value += " world";
 }
