@@ -1,14 +1,14 @@
 ﻿using System.Collections.Concurrent;
 
-namespace SandBox.TaskAPI
+namespace SandBox.TaskAPI;
+
+public class UltimateExample
 {
-    public class UltimateExample
+    public void Exectue(int numThreads = 4, int numItemsPerThread = 2, ConcurrentStack<int> stack = null)
     {
-        public void Exectue(int numThreads = 4, int numItemsPerThread = 2, ConcurrentStack<int> stack = null)
-        {
-            Task.WaitAll(Enumerable
-                .Range(0, numThreads)
-                .Select(i => Task.Factory.StartNew((obj) =>
+        Task.WaitAll(Enumerable
+            .Range(0, numThreads)
+            .Select(i => Task.Factory.StartNew((obj) =>
                 {
                     int index = (int)obj;
                     int[] array = new int[numItemsPerThread];
@@ -22,7 +22,6 @@ namespace SandBox.TaskAPI
                 CancellationToken.None,
                 TaskCreationOptions.DenyChildAttach,
                 TaskScheduler.Default))
-                .ToArray());
-        }
+            .ToArray());
     }
 }
