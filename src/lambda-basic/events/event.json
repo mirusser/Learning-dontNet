@@ -1,0 +1,5 @@
+{
+    "first_name": "John",
+    "last_name": "Doe",
+    "message": "Hello world from lambda from .net 8"
+}

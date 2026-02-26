@@ -1,0 +1,62 @@
+[
+  {
+    "Text": "Programs must be written for people to read, and only incidentally for machines to execute.",
+    "Author": "Harold Abelson",
+    "Origin": "Structure and Interpretation of Computer Programs",
+    "Categories": ["Programming", "Philosophy", "Code Quality"]
+  },
+  {
+    "Text": "Simplicity is prerequisite for reliability.",
+    "Author": "Edsger W. Dijkstra",
+    "Origin": "Notes on Structured Programming",
+    "Categories": ["Software Design", "Reliability", "Best Practices"]
+  },
+  {
+    "Text": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    "Author": "Martin Fowler",
+    "Origin": "Refactoring: Improving the Design of Existing Code",
+    "Categories": ["Clean Code", "Software Craftsmanship", "Programming"]
+  },
+  {
+    "Text": "Talk is cheap. Show me the code.",
+    "Author": "Linus Torvalds",
+    "Origin": "Mailing list discussion, 2000",
+    "Categories": ["Motivation", "Programming", "Action"]
+  },
+  {
+    "Text": "Before software can be reusable it first has to be usable.",
+    "Author": "Ralph Johnson",
+    "Origin": "Design Patterns: Elements of Reusable Object-Oriented Software",
+    "Categories": ["Software Engineering", "Design Patterns", "Usability"]
+  },
+  {
+    "Text": "First, solve the problem. Then, write the code.",
+    "Author": "John Johnson",
+    "Origin": "Quote widely attributed to John Johnson",
+    "Categories": ["Problem Solving", "Programming", "Mindset"]
+  },
+  {
+    "Text": "Testing shows the presence, not the absence of bugs.",
+    "Author": "Edsger W. Dijkstra",
+    "Origin": "The Humble Programmer",
+    "Categories": ["Testing", "Quality Assurance", "Software Engineering"]
+  },
+  {
+    "Text": "The most disastrous thing that you can ever learn is your first programming language.",
+    "Author": "Alan Kay",
+    "Origin": "OOPSLA 1997",
+    "Categories": ["Programming Languages", "Learning", "Career Advice"]
+  },
+  {
+    "Text": "Premature optimization is the root of all evil.",
+    "Author": "Donald Knuth",
+    "Origin": "Structured Programming with goto Statements",
+    "Categories": ["Performance", "Optimization", "Programming Wisdom"]
+  },
+  {
+    "Text": "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
+    "Author": "Brian Kernighan",
+    "Origin": "The Elements of Programming Style",
+    "Categories": ["Debugging", "Code Quality", "Software Design"]
+  }
+]

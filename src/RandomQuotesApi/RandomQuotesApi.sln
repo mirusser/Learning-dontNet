@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomQuotesApi", "RandomQuotesApi\RandomQuotesApi.csproj", "{E5190D1A-D4F6-4A67-8271-5AA198DB1E58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9063E8D8-2522-45EC-9D70-99E67489E801}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5190D1A-D4F6-4A67-8271-5AA198DB1E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5190D1A-D4F6-4A67-8271-5AA198DB1E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5190D1A-D4F6-4A67-8271-5AA198DB1E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5190D1A-D4F6-4A67-8271-5AA198DB1E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9063E8D8-2522-45EC-9D70-99E67489E801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9063E8D8-2522-45EC-9D70-99E67489E801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9063E8D8-2522-45EC-9D70-99E67489E801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9063E8D8-2522-45EC-9D70-99E67489E801}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

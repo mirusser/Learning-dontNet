@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "name": "Attach to .NET 8 Lambda",
+        "type": "coreclr",
+        "request": "attach",
+        // Let VSCode ask you which debug server to pick
+        "processId": "${command:pickRemoteProcess}",
+        "pipeTransport": {
+            "pipeProgram": "docker",
+            "pipeArgs": [
+            "exec", "-i",
+            "keen_noyce",                          // your container’s name
+            "/tmp/lambci_debug_files/vsdbg",      // VSDBG path inside container
+            "--interpreter=vscode"                // use the VS Code debug protocol
+            ],
+            "debuggerPath": "/tmp/lambci_debug_files/vsdbg",
+            "pipeCwd": "${workspaceFolder}",
+            "quoteArgs": false
+        },
+        "sourceFileMap": {
+            "/var/task": "${workspaceFolder}"
+        }
+    }]
+}

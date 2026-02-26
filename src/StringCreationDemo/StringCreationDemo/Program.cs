@@ -9,6 +9,9 @@ public class Benchy
 {
     private const string ClearValue = "Password123!";
     
+    // [Params("Password123!", "HelloWorld", "ABC123456")]
+    // public string ClearValue { get; set; } = null!;
+    
     [Benchmark]
     public string MaskNaive()
     {
